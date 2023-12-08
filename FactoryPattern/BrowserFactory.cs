@@ -1,4 +1,4 @@
-﻿using Constants;
+using Constants;
 using Constants.TestSettings.Enum;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
