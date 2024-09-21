@@ -7,7 +7,7 @@ namespace Orange_HRM_Tests
     public class DashboardTest : BaseTest
     {
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        
+
         [Test]
         public void DashboardAccessValidation()
         {
