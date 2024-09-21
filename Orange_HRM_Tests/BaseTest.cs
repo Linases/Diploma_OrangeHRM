@@ -1,71 +1,56 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using Functionality_Tests_Suit.FactoryPattern;
-using Functionality_Tests_Suit.Constants;
+using FactoryPattern;
+using Constants;
+using Orange_HRM_Pages;
 
-namespace Functionality_Tests_Suit
+namespace Orange_HRM_Tests
 {
+    [TestFixture]
     public class BaseTest
     {
         protected static IWebDriver Driver;
         protected readonly string MainUrl;
-
-        private (string userName, string userPassword) standartUserCredentials = ("standard_user", "secret_sauce");
-        private (string userName, string userPassword) invalidUserCredentials = ("invalid_user", "invalid_password");
-
+        private LoginPage _loginPage;
+        private UserProfilePage _userProfilePage;
         public BaseTest()
         {
-            MainUrl = "https://www.saucedemo.com";
+            MainUrl = "https://opensource-demo.orangehrmlive.com";
         }
 
         [OneTimeSetUp]
-        public static void OneTimeSetUp()
+        public void OneTimeSetUp()
         {
-            Driver = BrowserFactory.GetDriver(BrowserType.Firefox);
+            Driver = BrowserFactory.GetDriver(BrowserType.Chrome);
+            Driver.Navigate().GoToUrl(MainUrl);
+            Driver.Manage().Window.Maximize();
+            Assert.That(Driver.Title, Is.EqualTo("OrangeHRM"), "Login Page is not displayed");
+            Assert.That(Driver.Url.Contains("login"), "Login Page is not opened");
         }
 
-        [SetUp]
-        public void Setup()
+        [SetUp] 
+        public void Login()
         {
-            Driver.Navigate().GoToUrl(MainUrl);
+            _loginPage = new LoginPage(Driver);
+            _loginPage.Login(ValidCredentials.userName, ValidCredentials.password);
+            Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to it's dashboard");
+        }
+
+        [TearDown] 
+        public void TearDown() 
+        {
+            _userProfilePage= new UserProfilePage(Driver);
+            _userProfilePage.ClickUserProfileDropdown();
+            Assert.That(_userProfilePage.IsUserProfileDropdownMenuDisplayed(), "Dropdown options did not appear");
+            _userProfilePage.ClickLogout();
+            Assert.That(Driver.Url.Contains("login"), "Login Page is not opened");
+            Assert.That(_loginPage.IsLoginButtonDisplayed(), Is.True, "Login button is not displayed");
         }
 
         [OneTimeTearDown]
-        public static void TearDown()
+        public static void OneTimeTearDown()
         {
             BrowserFactory.CloseDriver();
-        }
-
-        public void StandardUserLogin()
-        {
-            Login(standartUserCredentials.userName, standartUserCredentials.userPassword);
-            var pageUrl = Driver.Url;
-            Assert.That(pageUrl, Is.EqualTo($"{MainUrl}/inventory.html"));
-            var pageTitle = Driver.Title;
-            Assert.That(pageTitle, Is.EqualTo("Swag Labs"));
-        }
-        public void InvalidUserLogin()
-        {
-            Login(invalidUserCredentials.userName, invalidUserCredentials.userPassword);
-        }
-
-        private void Login(string username, string password)
-        {
-            var elementUserName = Driver.FindElement(By.Id("user-name"));
-            elementUserName.SendKeys($"{username}");
-            var elementPassword = Driver.FindElement(By.Id("password"));
-            elementPassword.SendKeys($"{password}");
-            var elementLoginButton = Driver.FindElement(By.Id("login-button"));
-            elementLoginButton.Click();
-        }
-
-        public void AddProductToCart()
-        {
-            var elementItem = Driver.FindElement(By.Id("item_4_title_link")).Click;
-            var elementAddButton = Driver.FindElement(By.XPath("//button[text() = 'Add to cart']"));
-            elementAddButton.Click();
-            var elementAddedItem = Driver.FindElement(By.ClassName("shopping_cart_badge"));
-            Assert.That(elementAddedItem.Text.Contains('1'));
         }
     }
 }

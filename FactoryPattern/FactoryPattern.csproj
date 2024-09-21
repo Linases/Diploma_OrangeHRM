@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -8,10 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="4.16.2" />
+    <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wrappers\Wrappers.csproj" />
+    <ProjectReference Include="..\Constants\Constants.csproj" />
   </ItemGroup>
 
 </Project>
