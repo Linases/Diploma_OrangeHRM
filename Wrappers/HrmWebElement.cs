@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using Constants.TestSettings.Enum;
 using FactoryPattern;

@@ -1,4 +1,4 @@
-﻿using Constants.Admin;
+using Constants.Admin;
 using Constants.Admin.Job;
 using OpenQA.Selenium;
 using Utilities;

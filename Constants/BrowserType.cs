@@ -1,5 +1,4 @@
-﻿
-namespace Functionality_Tests_Suit.Constants
+﻿namespace Constants
 {
     public enum BrowserType
     {

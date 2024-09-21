@@ -1,4 +1,4 @@
-﻿using Constants.Dashboard;
+using Constants.Dashboard;
 using Constants.LeftNavigation;
 using Constants.PIM;
 using OpenQA.Selenium;
