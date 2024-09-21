@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diploma_OrangeHRM", "Diploma_OrangeHRM.csproj", "{376D3C84-0BCE-43F6-BB56-8B7EDA5CBCFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diploma_OrangeHRM", "Diploma_OrangeHRM.csproj", "{376D3C84-0BCE-43F6-BB56-8B7EDA5CBCFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orange_HRM_Tests", "Orange_HRM_Tests\Orange_HRM_Tests.csproj", "{DEC8E2A2-21FC-4BBD-9610-D3DF08B1C071}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orange_HRM_Pages", "Orange_HRM_Pages\Orange_HRM_Pages.csproj", "{E567EFC0-40A1-4E9B-95CA-ED5FC6D66FA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrappers", "Wrappers\Wrappers.csproj", "{83C9CFA7-3EE5-4E07-A3AF-19FD8A5E4B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{C1714B2D-8CEE-44B6-8A4E-A4AEE2D50F75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{376D3C84-0BCE-43F6-BB56-8B7EDA5CBCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{376D3C84-0BCE-43F6-BB56-8B7EDA5CBCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{376D3C84-0BCE-43F6-BB56-8B7EDA5CBCFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC8E2A2-21FC-4BBD-9610-D3DF08B1C071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC8E2A2-21FC-4BBD-9610-D3DF08B1C071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC8E2A2-21FC-4BBD-9610-D3DF08B1C071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC8E2A2-21FC-4BBD-9610-D3DF08B1C071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E567EFC0-40A1-4E9B-95CA-ED5FC6D66FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E567EFC0-40A1-4E9B-95CA-ED5FC6D66FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E567EFC0-40A1-4E9B-95CA-ED5FC6D66FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E567EFC0-40A1-4E9B-95CA-ED5FC6D66FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C9CFA7-3EE5-4E07-A3AF-19FD8A5E4B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C9CFA7-3EE5-4E07-A3AF-19FD8A5E4B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C9CFA7-3EE5-4E07-A3AF-19FD8A5E4B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C9CFA7-3EE5-4E07-A3AF-19FD8A5E4B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1714B2D-8CEE-44B6-8A4E-A4AEE2D50F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1714B2D-8CEE-44B6-8A4E-A4AEE2D50F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1714B2D-8CEE-44B6-8A4E-A4AEE2D50F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1714B2D-8CEE-44B6-8A4E-A4AEE2D50F75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
