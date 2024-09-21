@@ -102,13 +102,13 @@ namespace Wrappers
 
         public string WaitToGetText(By locator)
         {
-            var element = WaitHelper.GetWait(Driver,30).Until(ExpectedConditions.ElementIsVisible(locator)).Text;
-            return element;
+            var element = WaitHelper.GetWait(Driver,30, 15).Until(ExpectedConditions.ElementIsVisible(locator));
+            return element.Text;
         }
 
-        public string GetTextToBePresentInElement(By locator, string text)
+        public string GetTextToBePresentInElement(IWebElement element, string text)
         {
-            Driver.GetWait().Until(ExpectedConditions.TextToBePresentInElementValue(locator, text)); ;
+            Driver.GetWait(30,10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
             return Element.Text;
         }
 

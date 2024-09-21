@@ -17,7 +17,7 @@ namespace Orange_HRM_Tests
         private static string _nationality = "Afghan";
         private string _editnationality = _nationality.Substring(0, _nationality.Length - 1);
 
-
+        [Test]
         public void ChangeNationality()
         {
             _leftPanelNavigationPage.ClickAdmin();

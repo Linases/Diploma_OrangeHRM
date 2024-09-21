@@ -21,7 +21,16 @@ namespace Orange_HRM_Tests
         private string _firstName = $"{RandomHelper.RandomGenerate(6)}";
         private string _middleName = $"{RandomHelper.RandomGenerate(5)}";
         private string _lastName = $"{RandomHelper.RandomGenerate(7)}";
-  
+        private LoginPage _loginPage;
+        
+        [SetUp]
+        public void Login()
+        {
+            _loginPage = new LoginPage(Driver);
+            _loginPage.Login(ValidCredentials.userName, ValidCredentials.password);
+            Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to it's dashboard");
+        }
+
         [Test]
         public void AddNewEmployee()
         {
@@ -33,8 +42,8 @@ namespace Orange_HRM_Tests
             Assert.That(headerTextAddEmployee.Equals(PIMHeadersNames.AddEmployee), Is.True);
             _employeePage.AddEmployFullName(_firstName, _middleName, _lastName);
             Driver.GetWait().Until(ExpectedConditions.UrlContains("PersonalDetails"));
-            var employeeName = _employeePage.GetEmployeeName();
-            Assert.That(employeeName, Is.EqualTo($"{_firstName} {_lastName}"));// errow when run not debug
+            var isNameCorrect = _employeePage.IsNameCorrect($"{_firstName} {_lastName}");
+            Assert.That(isNameCorrect, Is.True, $"Employee name is not {_firstName} {_lastName}");// errow when run not debug
             Assert.That(_employeePage.IsEmployeeListTabOpen(), Is.True, "Employee List tab is not opened");
         }
     }

@@ -28,18 +28,12 @@ namespace Orange_HRM_Tests
             Assert.That(Driver.Url.Contains("login"), "Login Page is not opened");
         }
 
-        [SetUp] 
-        public void Login()
-        {
-            _loginPage = new LoginPage(Driver);
-            _loginPage.Login(ValidCredentials.userName, ValidCredentials.password);
-            Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to it's dashboard");
-        }
-
+        
         [TearDown] 
         public void TearDown() 
         {
             _userProfilePage= new UserProfilePage(Driver);
+            _loginPage= new LoginPage(Driver);
             _userProfilePage.ClickUserProfileDropdown();
             Assert.That(_userProfilePage.IsUserProfileDropdownMenuDisplayed(), "Dropdown options did not appear");
             _userProfilePage.ClickLogout();

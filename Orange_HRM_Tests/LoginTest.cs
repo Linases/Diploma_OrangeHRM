@@ -15,7 +15,7 @@ namespace Orange_HRM_Tests
         }
 
         [Test]
-        public void SuccessfulLogin()
+          public void SuccesfullLogin()
         {
             _loginPage.Login(ValidCredentials.userName, ValidCredentials.password);
             Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to it's dashboard");

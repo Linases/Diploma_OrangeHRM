@@ -9,6 +9,8 @@ namespace Orange_HRM_Pages
         private By UserName = By.XPath("//*[@name='username']");
         private By Password = By.XPath("//*[@name='password']");
         private Button LoginButton => new Button(By.XPath("//*[@type='submit']"));
+        private TextBox UserNameTextBox => new TextBox(UserName);
+        private TextBox PasswordTextBox => new TextBox(Password);
         public LoginPage(IWebDriver driver)
         {
             _driver = driver;
@@ -16,10 +18,8 @@ namespace Orange_HRM_Pages
 
         public void Login(string userName, string userPassword)
         {
-            var name = new TextBox(UserName);
-            name.WaitoToEnterText(userName, UserName);
-            var password = new TextBox(Password);
-            password.WaitoToEnterText(userPassword, Password);
+            UserNameTextBox.ClearAndEnterText(userName,UserName);
+            PasswordTextBox.ClearAndEnterText(userPassword, Password);
             LoginButton.Click();
         }
 
