@@ -1,9 +1,9 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
+﻿using Constants;
 using OpenQA.Selenium;
-using Functionality_Tests_Suit.Constants;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 
-namespace Functionality_Tests_Suit.FactoryPattern
+namespace FactoryPattern
 {
     public static class BrowserFactory
     {
