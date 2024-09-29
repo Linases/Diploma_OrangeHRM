@@ -12,6 +12,5 @@ namespace Constants
         public const string PIM = "PIM";
         public const string Admin = "Admin";
         public const string Dashboard = "Dashboard";
-
     }
 }

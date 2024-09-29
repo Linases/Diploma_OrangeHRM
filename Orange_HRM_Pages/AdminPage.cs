@@ -1,13 +1,6 @@
 ﻿using Constants;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities;
 using Wrappers;
 
@@ -19,18 +12,19 @@ namespace Orange_HRM_Pages
 
         private By AllNationalities => By.XPath("//*[@class='oxd-table-body']/div");
         private By JobTitleTableList => By.XPath("//*[@class='oxd-table-card']");
+        private By JobsTitles => By.XPath("//*[@class='oxd-dropdown-menu']/li/a[text()='Job Titles']");
         private Button Nationalities => new Button(By.XPath("//*[text()='Nationalities']"));
         private Button UserManagementButton => new Button(By.XPath("//*[text()='User Management ']"));
         private Button JobButton => new Button(By.XPath("//*[text()='Job ']"));
         private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
         private DropDown OptionsAvailable => new DropDown(Options);
-
         private TextBox NationalityNameInput => new(NationalityName);
         private By NationalityName => By.XPath("//div[@class='oxd-form-row']//input[@class='oxd-input oxd-input--active']");
         private Button SaveButton => new(By.XPath("//button[@type='submit']"));
         private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
         private Button AdminOptions => new Button(TopBarMenuItems);
         private Button AddJobTitleButton => new(By.XPath("//button[text()=' Add ']"));
+        private Button JobTitles => new(JobsTitles);
         private By JobTitleInput => By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]");
         private By VerifyDeleteButton => By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']");
         public AdminPage(IWebDriver driver)
@@ -86,14 +80,18 @@ namespace Orange_HRM_Pages
         public bool AreAdministrationOptionsDisplayed() => AdminOptions.AllElementsAreDisplayed(TopBarMenuItems);
 
         public void ClickUserManagement() => UserManagementButton.Click();
+
         public void ClickJob() => JobButton.Click();
 
         public bool AreOptionsDisplayed() => OptionsAvailable.AllElementsAreDisplayed(Options);
 
-        public bool IsJobTitleAvailable() => IsLinkAvailable(JobTabNames.JobTitles);
+        public bool IsJobTitleAvailable() => IsOptionAvailable(JobTabNames.JobTitles);
 
-        public void SelectJobTitle() => SelectLink(JobTabNames.JobTitles);
-
+        public void SelectJobTitlesButton()
+        {
+            JobTitles.Click();
+            _driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(JobsTitles));
+        }
         public bool AreJobTitilesItemsVisible()
         {
             var table = new DropDown(JobTitleTableList);
@@ -101,7 +99,7 @@ namespace Orange_HRM_Pages
             return areVisible;
         }
 
-        public void ClickAddJobTitle()=> AddJobTitleButton.Click(); 
+        public void ClickAddJobTitle() => AddJobTitleButton.Click();
 
         public void AddJobTitleName(string text)
         {
@@ -125,11 +123,10 @@ namespace Orange_HRM_Pages
             return false;
         }
 
-
-        private bool IsLinkAvailable(string text)
+        private bool IsOptionAvailable(string text)
         {
             var list = _driver.FindElements(Options).ToList();
-            
+
             foreach (var item in list)
             {
                 var elementValue = item.Text;
@@ -139,23 +136,6 @@ namespace Orange_HRM_Pages
                 }
             }
             return false;
-        }
-
-        private void SelectLink(string text)
-        {
-            var list = _driver.FindElements(Options).ToList();
-
-            foreach (var item in list)
-            {
-                var elementValue = item.Text;
-                if (item.Displayed && item.Enabled && elementValue.Equals(text))
-                {
-                    item.Click();
-                    break;
-                }
-            }
-
-            
         }
     }
 }

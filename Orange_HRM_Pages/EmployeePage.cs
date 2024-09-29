@@ -14,7 +14,7 @@ namespace Orange_HRM_Pages
     public class EmployeePage
     {
         private IWebDriver _driver;
-        private By Employee => By.XPath("//h6[contains(@class, 'strong')]");
+        private By Employee => By.XPath("//*[@class='orangehrm-edit-employee-name']/h6");
         private Button AddEmployee => new(By.XPath("//a[text()='Add Employee']/parent::*"));
         private TextBox FirstName => new(By.XPath("//*[@name='firstName']"));
         private TextBox MiddleName => new(By.XPath("//*[@name='middleName']"));
@@ -40,7 +40,12 @@ namespace Orange_HRM_Pages
             SaveButton.Click();
         }
 
-        public string GetEmployeeName() => EmployeeName.WaitToGetText(Employee);
+        public bool IsNameCorrect(string name)
+        {
+           var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
+            return element.Equals(name);
+        }
+
         public bool IsEmployeeListTabOpen() => IsTabOpen(EmployeeList);
         private bool IsTabOpen(HrmWebElement element)
         {
