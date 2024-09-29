@@ -111,20 +111,8 @@ namespace Wrappers
             Driver.GetWait(30,10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
             return Element.Text;
         }
-
-        public bool IsElementDisplayedJs()
-        {
-            var jsExecutor = (IJavaScriptExecutor)Driver;
-            var isElementVisible = (bool)jsExecutor.ExecuteScript(@"
-        var rect = arguments[0].getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );", Element);
-            return isElementVisible;
-        }
+                
+        public void WaitForElementIsNotDisplayed(By locator) => Driver.GetWait().Until(x => !IsElementDisplayed(locator));
 
         public bool IsAvailableToClickButton(By locator)
         {
