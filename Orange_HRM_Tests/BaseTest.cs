@@ -1,4 +1,4 @@
-﻿using Constants.Html;
+using Constants.Html;
 using Constants.TestSettings.Enum;
 using FactoryPattern;
 using NUnit.Framework;
