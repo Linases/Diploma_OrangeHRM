@@ -12,10 +12,7 @@ namespace FactoryPattern
 
         public static IWebDriver GetDriver(BrowserType browserType)
         {
-            if (_driver == null)
-            {
-                _driver = CreateDriverInstance(browserType);
-            }
+            _driver ??= CreateDriverInstance(browserType);
             return _driver;
         }
 
