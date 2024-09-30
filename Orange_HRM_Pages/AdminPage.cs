@@ -36,14 +36,7 @@ namespace Orange_HRM_Pages
         public bool IsAnyNationalitiesDisplayed()
         {
             var list = _driver.GetWaitForElementsVisible(AllNationalities).Where(x => x.Displayed).ToList();
-            if (list.Count > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return list.Count > 0;
         }
 
         public void ClickEditButton(string _title)
@@ -90,7 +83,7 @@ namespace Orange_HRM_Pages
         public void SelectJobTitlesButton()
         {
             JobTitles.Click();
-            _driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(JobsTitles));
+            _ = _driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(JobsTitles));
         }
         public bool AreJobTitilesItemsVisible()
         {

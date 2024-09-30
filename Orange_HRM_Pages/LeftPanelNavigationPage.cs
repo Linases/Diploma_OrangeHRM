@@ -1,5 +1,6 @@
 ﻿using Constants;
 using OpenQA.Selenium;
+using Utilities;
 using Wrappers;
 
 namespace Orange_HRM_Pages
@@ -9,10 +10,12 @@ namespace Orange_HRM_Pages
         private IWebDriver _driver;
 
         private By Dashboard => By.XPath("//*[@class='oxd-grid-3 orangehrm-dashboard-grid']/div");
+        private By MenuItemsLocator => By.XPath("//*[@class ='oxd-main-menu']/li//a//span");
         private Button PIMButton => new(By.XPath("//a[@href='/web/index.php/pim/viewPimModule']"));
         private Button AdminButton => new(By.XPath("//a[@href='/web/index.php/admin/viewAdminModule']"));
         private Button DashboardButton => new(By.XPath("//a[@href='/web/index.php/dashboard/index']"));
         private TextBox Search => new(By.XPath("//input[@placeholder='Search']"));
+        private HrmWebElement MenuItems => new HrmWebElement(MenuItemsLocator);
         private DropDown DashboardElements => new(Dashboard);
 
         public LeftPanelNavigationPage(IWebDriver driver)
@@ -28,24 +31,34 @@ namespace Orange_HRM_Pages
 
         public void ClickDashboard() => DashboardButton.Click();
 
-        public string GetAdminHeader() => GetText(LeftNavigationMenuNames.Admin);
+        public string GetAdminHeader() => GetMenuName(LeftNavigationMenuNames.Admin);
 
-        public string GetPIMHeader() => GetText(LeftNavigationMenuNames.PIM);
+        public string GetPIMHeader() => GetMenuName(LeftNavigationMenuNames.PIM);
 
-        public string GetAddEmployeeHeader() => GetText(PIMHeadersNames.AddEmployee);
+        public string GetAddEmployeeHeader() => GetMenuName(PIMHeadersNames.AddEmployee);
 
-        public string GetDashboradHeader() => GetText(LeftNavigationMenuNames.Dashboard);
+        public string GetDashboradHeader() => GetMenuName(LeftNavigationMenuNames.Dashboard);
 
-        public void EnterSearchText(string text)
+        public void EnterSearchText(string text) => Search.SendKeys(text);
+
+        public List<string> GetAllMenuItems()
         {
-            Search.SendKeys(text);
+            _driver.GetWait().Until(x =>
+            {
+                MenuItems.AllElementsAreDisplayed(MenuItemsLocator);
+
+                return true;
+            });
+
+            var menuItems = _driver.FindElements(MenuItemsLocator).ToList();
+            return menuItems.Select(x => x.Text).ToList();
         }
 
-        public bool IsQuickLaunchAvailable() => IsElementAvailable(DashboardElementsNames.QuickLaunch);
+        public bool IsQuickLaunchAvailable() => IsElementAvailable(Dashboard, DashboardElementsNames.QuickLaunch);
 
-        private bool IsElementAvailable(string text)
+        private bool IsElementAvailable(By locator, string text)
         {
-            var list = _driver.FindElements(Dashboard).ToList();
+            var list = _driver.FindElements(locator).ToList();
 
             foreach (var item in list)
             {
@@ -58,7 +71,7 @@ namespace Orange_HRM_Pages
             return false;
         }
 
-        private string GetText(string text)
+        private string GetMenuName(string text)
         {
             By headerLocator = By.XPath($"//h6[text()='{text}']");
             var header = new TextBox(headerLocator);

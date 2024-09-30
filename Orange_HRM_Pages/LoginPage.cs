@@ -18,7 +18,7 @@ namespace Orange_HRM_Pages
 
         public void Login(string userName, string userPassword)
         {
-            UserNameTextBox.ClearAndEnterText(userName,UserName);
+            UserNameTextBox.ClearAndEnterText(userName, UserName);
             PasswordTextBox.ClearAndEnterText(userPassword, Password);
             LoginButton.Click();
         }

@@ -25,11 +25,11 @@ namespace Orange_HRM_Tests
             var headerTextAddEmployee = _leftPanelNavigationPage.GetAddEmployeeHeader();
             Assert.That(headerTextAddEmployee.Equals(PIMHeadersNames.AddEmployee), Is.True);
             _employeePage.AddEmployFullName(firstName, middleName, lastName);
-            Driver.GetWait().Until(ExpectedConditions.UrlContains("PersonalDetails"));
-            var isNameCorrect = _employeePage.IsNameCorrect($"{firstName} {lastName}");
-            Assert.That(isNameCorrect, Is.True, $"Employee name is not {firstName} {lastName}");
+            _ = Driver.GetWait().Until(ExpectedConditions.UrlContains("PersonalDetails"));
             var isEmployeeListTabOpen = _employeePage.IsEmployeeListTabOpen();
             Assert.That(isEmployeeListTabOpen, Is.True, "Employee List tab is not opened");
+            var isNameCorrect = _employeePage.IsNameDisplayedCorrectly($"{firstName} {lastName}");
+            Assert.That(isNameCorrect, Is.True, $"Employee name is not {firstName} {lastName}");
         }
     }
 }

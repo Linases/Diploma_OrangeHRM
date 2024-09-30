@@ -13,10 +13,15 @@ namespace Orange_HRM_Tests
         {
             _leftPanelNavigationPage.ClickDashboard();
             var headerTextDashboard = _leftPanelNavigationPage.GetDashboradHeader();
-            Assert.That(headerTextDashboard.Equals(LeftNavigationMenuNames.Dashboard), Is.True, "Dashoboard header is not shown");
-            Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to a dashboard");
-            Assert.That(_leftPanelNavigationPage.AreDashboardElementsDisplayed(), Is.True, "All Dashboard elements are not displayed");
-            Assert.That(_leftPanelNavigationPage.IsQuickLaunchAvailable(), Is.True, "Quick Launch element is not displayed");
+            var areDashboardElementsDisplayed = _leftPanelNavigationPage.AreDashboardElementsDisplayed();
+            var isQuickLaunchAvailable = _leftPanelNavigationPage.IsQuickLaunchAvailable();
+            Assert.Multiple(() =>
+            {
+                Assert.That(headerTextDashboard.Equals(LeftNavigationMenuNames.Dashboard), Is.True, "Dashoboard header is not shown");
+                Assert.That(Driver.Url.Contains("dashboard"), Is.True, "User was not redirected to a dashboard");
+                Assert.That(areDashboardElementsDisplayed, Is.True, "All Dashboard elements are not displayed");
+                Assert.That(isQuickLaunchAvailable, Is.True, "Quick Launch element is not displayed");
+            });
         }
     }
 }

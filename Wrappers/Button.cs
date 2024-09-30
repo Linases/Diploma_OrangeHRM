@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-using System.Xml.Linq;
 using Utilities;
 
 namespace Wrappers
@@ -24,7 +23,7 @@ namespace Wrappers
         {
             try
             {
-                WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(locator));
+                _ = WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(locator));
                 if (Element.Displayed)
                 {
                     Click();

@@ -1,24 +1,18 @@
 ﻿using Constants;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using NUnit.Framework;
 using Orange_HRM_Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities;
 
 namespace Orange_HRM_Tests
 {
-    [Parallelizable(scope:ParallelScope.Fixtures)]
+    [Parallelizable(scope: ParallelScope.Fixtures)]
     public class AdminTests : BaseTest
     {
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
         private AdminPage _adminPage => new AdminPage(Driver);
-        private string _newTitle;
+        private string? _newTitle;
         private bool _needToDelete;
-       
+
         [SetUp]
         public void AdminSetup()
         {
@@ -60,7 +54,7 @@ namespace Orange_HRM_Tests
         [TearDown]
         public void AdminTestsTearDown()
         {
-            if(_needToDelete)
+            if (_needToDelete)
             {
                 _needToDelete = false;
                 _adminPage.ClickDeleteButton(_newTitle);

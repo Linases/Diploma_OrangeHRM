@@ -9,14 +9,14 @@ namespace Orange_HRM_Tests
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
         private AdminPage _adminPage => new AdminPage(Driver);
         private static string _nationality = "Afghan";
-        private string _editNationality;
+        private string? _editNationality;
 
         [Test]
         public void ChangeNationality()
         {
             _editNationality = _nationality.Substring(0, _nationality.Length - 1);
             _leftPanelNavigationPage.ClickAdmin();
-            var headerTextAdmin = _leftPanelNavigationPage.GetAdminHeader();
+            _ = _leftPanelNavigationPage.GetAdminHeader();
             _adminPage.ClickNationalities();
             var isAnyNationalitiesDisplayed = _adminPage.IsAnyNationalitiesDisplayed();
             Assert.That(isAnyNationalitiesDisplayed, Is.True, "Nationalities are not displayed");

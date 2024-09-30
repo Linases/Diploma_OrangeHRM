@@ -1,12 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using Wrappers;
 
 namespace Orange_HRM_Pages
@@ -40,9 +32,9 @@ namespace Orange_HRM_Pages
             SaveButton.Click();
         }
 
-        public bool IsNameCorrect(string name)
+        public bool IsNameDisplayedCorrectly(string name)
         {
-           var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
+            var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
             return element.Equals(name);
         }
 
@@ -50,14 +42,7 @@ namespace Orange_HRM_Pages
         private bool IsTabOpen(HrmWebElement element)
         {
             var value = element.GetAttribute("class");
-            if (value.Contains("visited"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return value.Contains("visited");
         }
     }
 }

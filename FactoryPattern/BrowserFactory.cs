@@ -7,20 +7,17 @@ namespace FactoryPattern
 {
     public static class BrowserFactory
     {
-        private static IWebDriver _driver;
+        private static IWebDriver? _driver;
 
         public static IWebDriver GetDriver(BrowserType browserType)
         {
-            if (_driver == null)
-            {
-                _driver = CreateDriverInstance(browserType);
-            }
+            _driver ??= CreateDriverInstance(browserType);
             return _driver;
         }
 
         private static IWebDriver CreateDriverInstance(BrowserType browserType)
         {
-            IWebDriver _driver = null;
+            IWebDriver _driver;
             switch (browserType)
             {
                 case BrowserType.Firefox:

@@ -17,7 +17,7 @@ namespace Wrappers
 
         public void ClearAndEnterText(string text, By locator)
         {
-            WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator));
+            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator));
             Element.Clear();
             Element.SendKeys(text);
         }
@@ -27,6 +27,8 @@ namespace Wrappers
             WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator)).SendKeys(text);
         }
 
+        public void EnterText(string text, IWebElement element) => Element.SendKeys(text);
+
         public void DeleteAllTextWithKey()
         {
             Element.SendKeys(Keys.Control + "a");
@@ -35,7 +37,7 @@ namespace Wrappers
 
         public void DeleteAndEnterText(string text, By locator)
         {
-            WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementToBeClickable(locator));
+            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementToBeClickable(locator));
             Click();
             if (Element.GetAttribute("value").Length > 0)
             {
