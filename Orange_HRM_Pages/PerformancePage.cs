@@ -1,4 +1,4 @@
-﻿using Constants.Performance;
+using Constants.Performance;
 using OpenQA.Selenium;
 using Wrappers;
 
