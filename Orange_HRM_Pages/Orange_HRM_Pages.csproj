@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Orange_HRM_Modules\Orange_HRM_Modules.csproj" />
     <ProjectReference Include="..\Wrappers\Wrappers.csproj" />
+	<ProjectReference Include="..\Orange_HRM_Forms\Orange_HRM_Forms.csproj" />
   </ItemGroup>
 
 </Project>
