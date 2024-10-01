@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryPattern", "FactoryPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constants", "Constants\Constants.csproj", "{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orange_HRM_Forms", "Orange_HRM_Forms\Orange_HRM_Forms.csproj", "{B5C34C8C-BA87-44E9-A372-084E59C185B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C34C8C-BA87-44E9-A372-084E59C185B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5C34C8C-BA87-44E9-A372-084E59C185B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5C34C8C-BA87-44E9-A372-084E59C185B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5C34C8C-BA87-44E9-A372-084E59C185B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

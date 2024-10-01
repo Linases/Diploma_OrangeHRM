@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Wrappers;
+using Orange_HRM_Forms;
 
 namespace Orange_HRM_Pages
 {
@@ -11,6 +12,12 @@ namespace Orange_HRM_Pages
        // private Button AddEmployee => new(By.XPath("//a[text()='Add Employee']/parent::*"));
         private Button ConfirureTab => new(ConfirureTabLocator);
         private Button KPIsTab => new(KPIsLocator);
+        private AddPKIs
+        
+
+       
+
+
         //private TextBox FirstName => new(By.XPath("//*[@name='firstName']"));
         //private TextBox MiddleName => new(By.XPath("//*[@name='middleName']"));
         //private TextBox LastName => new(By.XPath("//*[@name='lastName']"));
@@ -25,7 +32,12 @@ namespace Orange_HRM_Pages
 
         public void ClickConfigureTab() => ConfirureTab.ClickWhenClicable(ConfirureTabLocator);
 
-        public void ClickKPIsTab() => KPIsTab.ClickWhenClicable(KPIsLocator);
+        public  Ad ClickKPIsTab()
+        {
+            KPIsTab.ClickWhenClicable(KPIsLocator);
+            return new AddKPIForm(_driver);
+        }
+            
 
         public void AddEmployFullName(string firstName, string middleName, string lastName)
         {
