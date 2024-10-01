@@ -8,12 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Constants\Constants.csproj" />
-    <ProjectReference Include="..\FactoryPattern\FactoryPattern.csproj" />
-    <ProjectReference Include="..\Orange_HRM_Pages\Orange_HRM_Pages.csproj" />
-    <ProjectReference Include="..\Orange_HRM_Tests\Orange_HRM_Tests.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
-    <ProjectReference Include="..\Wrappers\Wrappers.csproj" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.25.0" />
   </ItemGroup>
 
 </Project>
