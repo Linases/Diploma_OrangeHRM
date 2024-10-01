@@ -14,6 +14,7 @@ namespace Orange_HRM_Pages
         private Button PIMButton => new(By.XPath("//a[@href='/web/index.php/pim/viewPimModule']"));
         private Button AdminButton => new(By.XPath("//a[@href='/web/index.php/admin/viewAdminModule']"));
         private Button DashboardButton => new(By.XPath("//a[@href='/web/index.php/dashboard/index']"));
+        private Button PerformanceButton => new(By.XPath("//a[@href='/web/index.php/performance/viewPerformanceModule']"));
         private TextBox Search => new(By.XPath("//input[@placeholder='Search']"));
         private HrmWebElement MenuItems => new HrmWebElement(MenuItemsLocator);
         private DropDown DashboardElements => new(Dashboard);
@@ -25,11 +26,28 @@ namespace Orange_HRM_Pages
 
         public bool AreDashboardElementsDisplayed() => DashboardElements.AllElementsAreDisplayed(Dashboard);
 
-        public void ClickPIM() => PIMButton.Click();
+        public EmployeePage ClickPIM()
+        {
+            PIMButton.Click();
 
-        public void ClickAdmin() => AdminButton.Click();
+            return new EmployeePage(_driver);
+        }
+
+        public AdminPage ClickAdmin()
+        {
+            AdminButton.Click();
+
+            return new AdminPage(_driver);
+        }
 
         public void ClickDashboard() => DashboardButton.Click();
+
+        public PerformancePage ClickPerformance()
+        {
+            PerformanceButton.Click();
+
+            return new PerformancePage(_driver);
+        }
 
         public string GetAdminHeader() => GetMenuName(LeftNavigationMenuNames.Admin);
 

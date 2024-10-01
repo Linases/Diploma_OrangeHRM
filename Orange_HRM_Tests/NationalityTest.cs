@@ -7,7 +7,7 @@ namespace Orange_HRM_Tests
     public class NationalityTest : BaseTest
     {
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        private AdminPage _adminPage => new AdminPage(Driver);
+        private AdminPage _adminPage;
         private static string _nationality = "Afghan";
         private string? _editNationality;
 
@@ -15,7 +15,7 @@ namespace Orange_HRM_Tests
         public void ChangeNationality()
         {
             _editNationality = _nationality.Substring(0, _nationality.Length - 1);
-            _leftPanelNavigationPage.ClickAdmin();
+            _adminPage = _leftPanelNavigationPage.ClickAdmin();
             _ = _leftPanelNavigationPage.GetAdminHeader();
             _adminPage.ClickNationalities();
             var isAnyNationalitiesDisplayed = _adminPage.IsAnyNationalitiesDisplayed();

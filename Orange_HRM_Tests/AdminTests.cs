@@ -9,14 +9,14 @@ namespace Orange_HRM_Tests
     public class AdminTests : BaseTest
     {
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        private AdminPage _adminPage => new AdminPage(Driver);
-        private string? _newTitle;
+        private string _newTitle;
         private bool _needToDelete;
+        private AdminPage _adminPage;
 
         [SetUp]
         public void AdminSetup()
         {
-            _leftPanelNavigationPage.ClickAdmin();
+            _adminPage = _leftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]

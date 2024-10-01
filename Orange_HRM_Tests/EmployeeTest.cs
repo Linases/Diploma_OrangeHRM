@@ -10,7 +10,7 @@ namespace Orange_HRM_Tests
     public class EmployeeTest : BaseTest
     {
         private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        private EmployeePage _employeePage => new EmployeePage(Driver);
+        private EmployeePage _employeePage;
 
         [Test]
         public void AddNewEmployee()
@@ -18,9 +18,9 @@ namespace Orange_HRM_Tests
             var firstName = $"{RandomHelper.RandomGenerate(6)}";
             var middleName = $"{RandomHelper.RandomGenerate(5)}";
             var lastName = $"{RandomHelper.RandomGenerate(7)}";
-            _leftPanelNavigationPage.ClickPIM();
             var headerTextPIM = _leftPanelNavigationPage.GetPIMHeader();
             Assert.That(headerTextPIM.Equals(LeftNavigationMenuNames.PIM), Is.True);
+            _employeePage = _leftPanelNavigationPage.ClickPIM();
             _employeePage.ClickAddEmployee();
             var headerTextAddEmployee = _leftPanelNavigationPage.GetAddEmployeeHeader();
             Assert.That(headerTextAddEmployee.Equals(PIMHeadersNames.AddEmployee), Is.True);
