@@ -14,9 +14,12 @@ namespace Orange_HRM_Tests
         private LoginPage _loginPage => new LoginPage(Driver);
         private UserProfilePage _userProfilePage => new UserProfilePage(Driver);
 
-        public BaseTest()
+        private bool _isLogoutNeeded;
+
+        public BaseTest( bool isLogoutNeeded = true)
         {
             MainUrl = "https://opensource-demo.orangehrmlive.com";
+            isLogoutNeeded = _isLogoutNeeded;
         }
 
         [SetUp]
@@ -28,7 +31,10 @@ namespace Orange_HRM_Tests
         [TearDown]
         public void TearDown()
         {
-            SuccessfullLogout();
+            if (_isLogoutNeeded)
+            {
+                SuccessfullLogout();
+            }
         }
 
         [OneTimeTearDown]

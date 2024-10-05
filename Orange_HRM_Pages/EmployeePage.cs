@@ -14,16 +14,14 @@ namespace Orange_HRM_Pages
         private Button SaveButton => new(By.XPath("//*[text()=' Save ']"));
         private Button EmployeeList => new(By.XPath("//*[text()='Employee List']/parent::*"));
         private TextBox EmployeeName => new(Employee);
+
         public EmployeePage(IWebDriver driver)
         {
             _driver = driver;
         }
 
-        public void ClickAddEmployee()
-        {
-            AddEmployee.Click();
-        }
-
+        public void ClickAddEmployee() => AddEmployee.Click();
+       
         public void AddEmployFullName(string firstName, string middleName, string lastName)
         {
             FirstName.SendKeys(firstName);

@@ -20,7 +20,7 @@ namespace Wrappers
 
         public HrmWebElement(By locator)
         {
-            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
+           WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
             var elements = Driver.FindElements(locator);
             Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         }

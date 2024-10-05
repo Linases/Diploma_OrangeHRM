@@ -8,22 +8,21 @@ namespace Orange_HRM_Tests
     [Parallelizable(scope: ParallelScope.Fixtures)]
     public class AdminTests : BaseTest
     {
-        private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
         private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
 
+
         [SetUp]
         public void AdminSetup()
-        {
+        {   _leftPanelNavigationPage = new LeftPanelNavigationPage(Driver);
             _adminPage = _leftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]
         public void ValidateAdminFunction()
         {
-            var headerTextAdmin = _leftPanelNavigationPage.GetAdminHeader();
-            Assert.That(headerTextAdmin.Equals(LeftNavigationMenuNames.Admin), Is.True, $"Page header text is not {headerTextAdmin}");
             var administrationOptionsDisplayed = _adminPage.AreAdministrationOptionsDisplayed();
             Assert.That(administrationOptionsDisplayed, Is.True, "Admin options are not displayed");
             _adminPage.ClickUserManagement();

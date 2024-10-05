@@ -8,15 +8,13 @@ namespace Orange_HRM_Pages
         private IWebDriver _driver;
         private By ConfirureTabLocator => By.XPath("//*[@aria-label='Topbar Menu']//*[text()='Configure ']");
         private By KPIsLocator => By.XPath("//*[@aria-label='Topbar Menu']//ul//*[text()='KPIs']");
-       // private Button AddEmployee => new(By.XPath("//a[text()='Add Employee']/parent::*"));
+
+        private By JobTitleSelect => By.XPath("//*[contains(@class,'select-text-input')]");
+        private Button AddKPIButton => new(By.XPath("//*[text()=' Add ']"));
+        private Button SaveKpIButton => new(By.XPath("//*[text()=' Save ']"));
+        private TextBox KpiInput = new TextBox(By.XPath("(//label['Key Performance Indicator']/parent::*/following-sibling::*/input)[1]"));
         private Button ConfirureTab => new(ConfirureTabLocator);
         private Button KPIsTab => new(KPIsLocator);
-        //private TextBox FirstName => new(By.XPath("//*[@name='firstName']"));
-        //private TextBox MiddleName => new(By.XPath("//*[@name='middleName']"));
-        //private TextBox LastName => new(By.XPath("//*[@name='lastName']"));
-        //private Button SaveButton => new(By.XPath("//*[text()=' Save ']"));
-        //private Button EmployeeList => new(By.XPath("//*[text()='Employee List']/parent::*"));
-        
 
         public PerformancePage(IWebDriver driver)
         {
@@ -27,25 +25,40 @@ namespace Orange_HRM_Pages
 
         public void ClickKPIsTab() => KPIsTab.ClickWhenClicable(KPIsLocator);
 
-        public void AddEmployFullName(string firstName, string middleName, string lastName)
+        public void ClickAddKpi() => AddKPIButton.Click();
+
+        public void AddKpItext(string text) => KpiInput.SendKeys(text);
+
+        public void SelectJobTitle()
         {
-            FirstName.SendKeys(firstName);
-            MiddleName.SendKeys(middleName);
-            LastName.SendKeys(lastName);
-            SaveButton.Click();
+            var selectDropdown = new HrmWebElement(JobTitleSelect);
+            selectDropdown.Click();
+            selectDropdown.SendKeys(Keys.ArrowDown);
         }
 
-        //public bool IsNameDisplayedCorrectly(string name)
-        //{
-        //    var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
-        //    return element.Equals(name);
-        //}
-
-        public bool IsEmployeeListTabOpen() => IsTabOpen(EmployeeList);
-        private bool IsTabOpen(HrmWebElement element)
-        {
-            var value = element.GetAttribute("class");
-            return value.Contains("visited");
-        }
+        public void ClickSaveButton ()=> SaveKpIButton.Click();
     }
 }
+
+//        public void AddEmployFullName(string firstName, string middleName, string lastName)
+//        {
+//            FirstName.SendKeys(firstName);
+//            MiddleName.SendKeys(middleName);
+//            LastName.SendKeys(lastName);
+//            SaveButton.Click();
+//        }
+
+//        //public bool IsNameDisplayedCorrectly(string name)
+//        //{
+//        //    var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
+//        //    return element.Equals(name);
+//        //}
+
+//        public bool IsEmployeeListTabOpen() => IsTabOpen(EmployeeList);
+//        private bool IsTabOpen(HrmWebElement element)
+//        {
+//            var value = element.GetAttribute("class");
+//            return value.Contains("visited");
+//        }
+//    }
+//}

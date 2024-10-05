@@ -9,7 +9,6 @@ namespace Orange_HRM_Pages
     public class AdminPage
     {
         private IWebDriver _driver;
-
         private By AllNationalities => By.XPath("//*[@class='oxd-table-body']/div");
         private By JobTitleTableList => By.XPath("//*[@class='oxd-table-card']");
         private By JobsTitles => By.XPath("//*[@class='oxd-dropdown-menu']/li/a[text()='Job Titles']");
