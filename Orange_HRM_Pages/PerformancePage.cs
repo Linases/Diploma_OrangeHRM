@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Wrappers;
+using Orange_HRM_Forms;
 
 namespace Orange_HRM_Pages
 {
