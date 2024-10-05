@@ -42,7 +42,12 @@ namespace Orange_HRM_Pages
 
         public void ClickDashboard() => DashboardButton.Click();
 
-        public void  ClickPerformance() =>  PerformanceButton.Click();                       
+        public PerformancePage ClickPerformance()
+        {
+            PerformanceButton.Click();
+
+            return new PerformancePage();
+        }
 
         public string GetAdminHeader() => GetMenuName(LeftNavigationMenuNames.Admin);
 
