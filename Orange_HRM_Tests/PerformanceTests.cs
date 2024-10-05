@@ -1,4 +1,4 @@
-﻿using Constants.Html;
+using Constants.Html;
 using Constants.Performance;
 using NUnit.Framework;
 using Orange_HRM_Pages;

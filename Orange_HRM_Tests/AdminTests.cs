@@ -46,7 +46,7 @@ namespace Orange_HRM_Tests
             _adminPage.AddJobTitleName(_newTitle);
             var isAddedJobDisplayed = _adminPage.IsDisplayedInTable(_newTitle);
             Assert.That(isAddedJobDisplayed, Is.True);
-            _needToDelete = true;
+            _needToDelete = false;
         }
 
         [TearDown]
