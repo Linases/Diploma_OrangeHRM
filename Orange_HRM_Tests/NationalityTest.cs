@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Constants;
+using NUnit.Framework;
 using Orange_HRM_Pages;
 
 namespace Orange_HRM_Tests
@@ -6,24 +7,23 @@ namespace Orange_HRM_Tests
     [TestFixture]
     public class NationalityTest : BaseTest
     {
-        private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        private AdminPage _adminPage => new AdminPage(Driver);
-        private static string _nationality = "Afghan";
-        private string _editNationality;
+        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
+        private AdminPage? _adminPage;
+        private readonly string _nationality = Nationalities.Afghan;
+        private string? _editedNationality;
 
         [Test]
         public void ChangeNationality()
         {
-            _editNationality = _nationality.Substring(0, _nationality.Length - 1);
-            _leftPanelNavigationPage.ClickAdmin();
-            var headerTextAdmin = _leftPanelNavigationPage.GetAdminHeader();
+            _adminPage = LeftPanelNavigationPage.ClickAdmin();
             _adminPage.ClickNationalities();
             var isAnyNationalitiesDisplayed = _adminPage.IsAnyNationalitiesDisplayed();
             Assert.That(isAnyNationalitiesDisplayed, Is.True, "Nationalities are not displayed");
             _adminPage.ClickEditButton(_nationality);
-            _adminPage.EditName(_editNationality);
-            var newName = _adminPage.GetChangedName(_editNationality);
-            Assert.That(newName, Is.EqualTo(_editNationality));
+            _editedNationality = _nationality.Substring(0, _nationality.Length - 1);
+            _adminPage.EditName(_editedNationality);
+            var newName = _adminPage.GetChangedName(_editedNationality);
+            Assert.That(newName, Is.EqualTo(_editedNationality));
         }
 
         [TearDown]
@@ -34,7 +34,7 @@ namespace Orange_HRM_Tests
 
         private void RestoreNationality()
         {
-            _adminPage.ClickEditButton(_editNationality);
+            _adminPage.ClickEditButton(_editedNationality);
             _adminPage.EditName(_nationality);
             var newName = _adminPage.GetChangedName(_nationality);
             Assert.That(newName, Is.EqualTo(_nationality));

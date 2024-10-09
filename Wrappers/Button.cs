@@ -1,16 +1,11 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-using System.Xml.Linq;
 using Utilities;
 
 namespace Wrappers
 {
     public class Button : HrmWebElement
     {
-        public Button(IWebElement element) : base(element)
-        {
-        }
-
         public Button(By locator) : base(locator)
         {
         }
@@ -24,7 +19,7 @@ namespace Wrappers
         {
             try
             {
-                WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(locator));
+                _ = WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(locator));
                 if (Element.Displayed)
                 {
                     Click();

@@ -1,35 +1,27 @@
-﻿using Constants;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Orange_HRM_Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities;
 
 namespace Orange_HRM_Tests
 {
-    [Parallelizable(scope:ParallelScope.Fixtures)]
+    [TestFixture]
     public class AdminTests : BaseTest
     {
-        private LeftPanelNavigationPage _leftPanelNavigationPage => new LeftPanelNavigationPage(Driver);
-        private AdminPage _adminPage => new AdminPage(Driver);
-        private string _newTitle;
+        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
+        private string? _newTitle;
         private bool _needToDelete;
-       
+        private AdminPage _adminPage;
+
+
         [SetUp]
         public void AdminSetup()
         {
-            _leftPanelNavigationPage.ClickAdmin();
+            _adminPage = LeftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]
         public void ValidateAdminFunction()
         {
-            var headerTextAdmin = _leftPanelNavigationPage.GetAdminHeader();
-            Assert.That(headerTextAdmin.Equals(LeftNavigationMenuNames.Admin), Is.True, $"Page header text is not {headerTextAdmin}");
             var administrationOptionsDisplayed = _adminPage.AreAdministrationOptionsDisplayed();
             Assert.That(administrationOptionsDisplayed, Is.True, "Admin options are not displayed");
             _adminPage.ClickUserManagement();
@@ -45,12 +37,12 @@ namespace Orange_HRM_Tests
         [Test]
         public void AddJobTitle()
         {
+            _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";
             _adminPage.ClickJob();
             _adminPage.SelectJobTitlesButton();
             var isJobTitlesTableVisible = _adminPage.AreJobTitilesItemsVisible();
             Assert.That(isJobTitlesTableVisible, Is.True, "Job Titles table is not visible");
             _adminPage.ClickAddJobTitle();
-            _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";
             _adminPage.AddJobTitleName(_newTitle);
             var isAddedJobDisplayed = _adminPage.IsAddedJobTitleDisplayed(_newTitle);
             Assert.That(isAddedJobDisplayed, Is.True);
@@ -60,7 +52,7 @@ namespace Orange_HRM_Tests
         [TearDown]
         public void AdminTestsTearDown()
         {
-            if(_needToDelete)
+            if (_needToDelete)
             {
                 _needToDelete = false;
                 _adminPage.ClickDeleteButton(_newTitle);

@@ -1,10 +1,10 @@
-﻿using Constants;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
-using OpenQA.Selenium;
+using Constants;
 using FactoryPattern;
-using Utilities;
+using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
+using Utilities;
 
 namespace Wrappers
 {
@@ -13,14 +13,14 @@ namespace Wrappers
         protected readonly IWebDriver Driver = BrowserFactory.GetDriver(BrowserType.Chrome);
         protected readonly IWebElement Element;
 
-        protected HrmWebElement(IWebElement element)
+        public HrmWebElement(IWebElement element)
         {
             Element = element;
         }
 
-        protected HrmWebElement(By locator)
+        public HrmWebElement(By locator)
         {
-            WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
+            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
             var elements = Driver.FindElements(locator);
             Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         }
@@ -42,7 +42,7 @@ namespace Wrappers
         public void Clear() => Element.Clear();
 
         public void Click() => Element.Click();
-     
+
         public void SendKeys(string text) => Element.SendKeys(text);
 
         public void Submit() => Element.Submit();
@@ -102,26 +102,22 @@ namespace Wrappers
 
         public string WaitToGetText(By locator)
         {
-            var element = WaitHelper.GetWait(Driver,30, 15).Until(ExpectedConditions.ElementIsVisible(locator));
+            var element = WaitHelper.GetWait(Driver, 30, 15).Until(ExpectedConditions.ElementIsVisible(locator));
             return element.Text;
         }
 
         public string GetTextToBePresentInElement(IWebElement element, string text)
         {
-            Driver.GetWait(30,10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
+            Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
             return Element.Text;
         }
-                
+
         public void WaitForElementIsNotDisplayed(By locator) => Driver.GetWait().Until(x => !IsElementDisplayed(locator));
 
         public bool IsAvailableToClickButton(By locator)
         {
             Driver.WaitForElementIsVisible(locator);
-            if (Element.Enabled && Element.Displayed)
-            {
-                return true;
-            }
-            return false;
+            return Element.Enabled && Element.Displayed;
         }
     }
 }

@@ -7,11 +7,7 @@ namespace Wrappers
 {
     public class TextBox : HrmWebElement
     {
-        public TextBox(IWebElement element) : base(element)
-        {
-        }
-
-        public TextBox(By locator) : base(locator)
+       public TextBox(By locator) : base(locator)
         {
         }
 
@@ -26,6 +22,8 @@ namespace Wrappers
         {
             WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator)).SendKeys(text);
         }
+
+        public void EnterText(string text) => Element.SendKeys(text);
 
         public void DeleteAllTextWithKey()
         {
