@@ -20,7 +20,7 @@ namespace Wrappers
 
         public HrmWebElement(By locator)
         {
-           WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
+            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
             var elements = Driver.FindElements(locator);
             Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         }
@@ -108,7 +108,7 @@ namespace Wrappers
 
         public string GetTextToBePresentInElement(IWebElement element, string text)
         {
-            _ = Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
+            Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
             return Element.Text;
         }
 
@@ -116,7 +116,7 @@ namespace Wrappers
 
         public bool IsAvailableToClickButton(By locator)
         {
-            _ = Driver.WaitForElementIsVisible(locator);
+            Driver.WaitForElementIsVisible(locator);
             return Element.Enabled && Element.Displayed;
         }
     }

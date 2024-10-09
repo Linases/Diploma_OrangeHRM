@@ -7,11 +7,7 @@ namespace Wrappers
 {
     public class TextBox : HrmWebElement
     {
-        public TextBox(IWebElement element) : base(element)
-        {
-        }
-
-        public TextBox(By locator) : base(locator)
+       public TextBox(By locator) : base(locator)
         {
         }
 

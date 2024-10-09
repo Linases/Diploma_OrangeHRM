@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Orange_HRM_Modules\Orange_HRM_Modules.csproj" />
     <ProjectReference Include="..\Wrappers\Wrappers.csproj" />
   </ItemGroup>
 

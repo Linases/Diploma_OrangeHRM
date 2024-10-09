@@ -1,39 +1,23 @@
-﻿using Constants;
-using FactoryPattern;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using Utilities;
+﻿using OpenQA.Selenium;
 using Wrappers;
 
 namespace Orange_HRM_Pages
 {
-    public class PerformancePage
+    public class PerformancePage : BasePage
     {
-        protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
         private By ConfirureTabLocator => By.XPath("//*[@aria-label='Topbar Menu']//*[text()='Configure ']");
         private By KPIsLocator => By.XPath("//*[@aria-label='Topbar Menu']//ul//*[text()='KPIs']");
         private By JobTitleSelect => By.XPath("//*[contains(@class,'select-text-input')]");
-        private By SaveKPI => (By.XPath("//*[text()=' Save ']"));
-        private By KPIList => By.XPath($"//*[@class='oxd-table-card']//*[text() ='{0}']");
         private By RecordsLocator => By.XPath("(//*[@class ='oxd-text oxd-text--span'])[1]");
-        private Button AddKPIButton => new(By.XPath("//*[text()=' Add ']"));
-        private Button SaveKpIButton => new(SaveKPI);
-
         private TextBox KpiInput => new TextBox(By.XPath("(//label['Key Performance Indicator']/parent::*/following-sibling::*/input)[1]"));
         private Button ConfirureTab => new(ConfirureTabLocator);
         private Button KPIsTab => new(KPIsLocator);
-
-        //public PerformancePage(IWebDriver driver)
-        //{
-        //    _driver = driver;
-        //}
 
         public void ClickConfigureTab() => ConfirureTab.ClickWhenClicable(ConfirureTabLocator);
 
         public void ClickKPIsTab() => KPIsTab.ClickIfDisplayed(KPIsLocator);
 
-        public void ClickAddKpi() => AddKPIButton.Click();
+        public void ClickAddKpi() => AddButton.Click();
 
         public void AddKpItext(string text) => KpiInput.SendKeys(text);
 
@@ -50,47 +34,34 @@ namespace Orange_HRM_Pages
             selectDropdown.SendKeys(Keys.Enter);
         }
 
-        public void ClickSaveButton()
-        {
-            SaveKpIButton.Click();
-            Driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(SaveKPI));
-        }
+        public new void ClickSaveButton() => SaveButton.Click();
 
-            public string GetKPIRecords ()
+        public string GetKPIRecords()
         {
             var records = new HrmWebElement(RecordsLocator);
             string numbers = new string(records.Text.Where(char.IsDigit).ToArray());
-            
+
             return numbers;
-        }
-
-        public void WaitForSpinnerIsNotVisible ()
-        {
-
-            By spinnerLocator = By.XPath("//*[@class='oxd-loading-spinner']");
-            var spinner = Driver.FindElement(spinnerLocator);
-            var element = Driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(spinnerLocator));
         }
 
         public bool IsAddedKPIDisplayed(string text)
         {
-           
-            var addedKPI = Driver.FindElement(By.XPath($"//*[@class='oxd-table-card']//*[text() ='{text}']"));
+            try
+            {
+                var addedKPI = Driver.FindElement(By.XPath($"//*[@class='oxd-table-card']//*[text() ='{text}']"));
+                return addedKPI.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
 
-            return addedKPI.Displayed;
-
-            //var list = _driver.GetWait().Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(KPIList)).ToList();
-            //var item
-            //foreach (var item in list)
-            //{
-            //    var elementValue = item.Text;
-            //    if (item.Displayed && elementValue.Equals(text))
-            //    {
-            //        return true;
-            //    }
-            //}
-            //return false;
+        public void DeleteKPI(string KPIname)
+        {
+            var button = new Button(By.XPath($"//div[(@class= 'oxd-table-cell oxd-padding-cell')]/div[text()='{KPIname}']/parent::*/following-sibling::*//i[@class='oxd-icon bi-trash']"));
+            button.Click();
+            VerifyDeleteToaster();
         }
     }
 }
-

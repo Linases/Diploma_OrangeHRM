@@ -1,11 +1,11 @@
 ﻿using OpenQA.Selenium;
+using Orange_HRM_Modules;
 using Wrappers;
 
 namespace Orange_HRM_Pages
 {
     public class EmployeePage
     {
-        private IWebDriver _driver;
         private By Employee => By.XPath("//*[@class='orangehrm-edit-employee-name']/h6");
         private Button AddEmployee => new(By.XPath("//a[text()='Add Employee']/parent::*"));
         private TextBox FirstName => new(By.XPath("//*[@name='firstName']"));
@@ -15,19 +15,16 @@ namespace Orange_HRM_Pages
         private Button EmployeeList => new(By.XPath("//*[text()='Employee List']/parent::*"));
         private TextBox EmployeeName => new(Employee);
 
-        public EmployeePage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
-
         public void ClickAddEmployee() => AddEmployee.Click();
-       
-        public void AddEmployFullName(string firstName, string middleName, string lastName)
+
+        public Employee AddEmployeeData(Employee employee)
         {
-            FirstName.SendKeys(firstName);
-            MiddleName.SendKeys(middleName);
-            LastName.SendKeys(lastName);
+            FirstName.SendKeys(employee.FirstName);
+            MiddleName.SendKeys(employee.MiddleName);
+            LastName.SendKeys(employee.Lastname);
             SaveButton.Click();
+
+            return employee;
         }
 
         public bool IsNameDisplayedCorrectly(string name)
@@ -37,6 +34,7 @@ namespace Orange_HRM_Pages
         }
 
         public bool IsEmployeeListTabOpen() => IsTabOpen(EmployeeList);
+
         private bool IsTabOpen(HrmWebElement element)
         {
             var value = element.GetAttribute("class");

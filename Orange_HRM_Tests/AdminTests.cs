@@ -1,23 +1,22 @@
-﻿using Constants;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Orange_HRM_Pages;
 using Utilities;
 
 namespace Orange_HRM_Tests
 {
-    [Parallelizable(scope: ParallelScope.Fixtures)]
+    [TestFixture]
     public class AdminTests : BaseTest
     {
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
-        private string _newTitle;
+        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
+        private string? _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
 
 
         [SetUp]
         public void AdminSetup()
-        {   _leftPanelNavigationPage = new LeftPanelNavigationPage(Driver);
-            _adminPage = _leftPanelNavigationPage.ClickAdmin();
+        {
+            _adminPage = LeftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]
@@ -38,16 +37,16 @@ namespace Orange_HRM_Tests
         [Test]
         public void AddJobTitle()
         {
+            _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";
             _adminPage.ClickJob();
             _adminPage.SelectJobTitlesButton();
             var isJobTitlesTableVisible = _adminPage.AreJobTitilesItemsVisible();
             Assert.That(isJobTitlesTableVisible, Is.True, "Job Titles table is not visible");
             _adminPage.ClickAddJobTitle();
-            _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";
             _adminPage.AddJobTitleName(_newTitle);
             var isAddedJobDisplayed = _adminPage.IsAddedJobTitleDisplayed(_newTitle);
             Assert.That(isAddedJobDisplayed, Is.True);
-            _needToDelete = false;
+            _needToDelete = true;
         }
 
         [TearDown]

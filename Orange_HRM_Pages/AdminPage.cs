@@ -6,35 +6,29 @@ using Wrappers;
 
 namespace Orange_HRM_Pages
 {
-    public class AdminPage
+    public class AdminPage : BasePage
     {
-        private IWebDriver _driver;
         private By AllNationalities => By.XPath("//*[@class='oxd-table-body']/div");
         private By JobTitleTableList => By.XPath("//*[@class='oxd-table-card']");
+        private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
+        private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
         private By JobsTitles => By.XPath("//*[@class='oxd-dropdown-menu']/li/a[text()='Job Titles']");
+        private By JobTitleInput => By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]");
         private Button Nationalities => new Button(By.XPath("//*[text()='Nationalities']"));
         private Button UserManagementButton => new Button(By.XPath("//*[text()='User Management ']"));
         private Button JobButton => new Button(By.XPath("//*[text()='Job ']"));
-        private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
         private DropDown OptionsAvailable => new DropDown(Options);
         private TextBox NationalityNameInput => new(NationalityName);
         private By NationalityName => By.XPath("//div[@class='oxd-form-row']//input[@class='oxd-input oxd-input--active']");
-        private Button SaveButton => new(By.XPath("//button[@type='submit']"));
-        private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
+        private new Button SaveButton => new(By.XPath("//button[@type='submit']"));
         private Button AdminOptions => new Button(TopBarMenuItems);
-        private Button AddJobTitleButton => new(By.XPath("//button[text()=' Add ']"));
         private Button JobTitles => new(JobsTitles);
-        private By JobTitleInput => By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]");
-        private By VerifyDeleteButton => By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']");
-        public AdminPage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
+
         public void ClickNationalities() => Nationalities.Click();
 
         public bool IsAnyNationalitiesDisplayed()
         {
-            var list = _driver.GetWaitForElementsVisible(AllNationalities).Where(x => x.Displayed).ToList();
+            var list = Driver.GetWaitForElementsVisible(AllNationalities).Where(x => x.Displayed).ToList();
             return list.Count > 0;
         }
 
@@ -45,13 +39,11 @@ namespace Orange_HRM_Pages
             button.Click();
         }
 
-        public void ClickDeleteButton(string _title)
+        public void ClickDeleteButton(string title)
         {
-            By deleteButton = By.XPath($"//div[(@class= 'oxd-table-cell oxd-padding-cell')]/div[text()='{_title}']/parent::*/following-sibling::*//i[@class='oxd-icon bi-trash']");
-            var button = new Button(deleteButton);
+            var button = new Button(By.XPath($"//div[(@class= 'oxd-table-cell oxd-padding-cell')]/div[text()='{title}']/parent::*/following-sibling::*//i[@class='oxd-icon bi-trash']"));
             button.Click();
-            var verifyDelete = new Button(_driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(VerifyDeleteButton)));
-            verifyDelete.ClickWhenClicable(VerifyDeleteButton);
+            VerifyDeleteToaster();
         }
 
         public void EditName(string text)
@@ -82,7 +74,7 @@ namespace Orange_HRM_Pages
         public void SelectJobTitlesButton()
         {
             JobTitles.Click();
-            _ = _driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(JobsTitles));
+            _ = Driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(JobsTitles));
         }
         public bool AreJobTitilesItemsVisible()
         {
@@ -91,7 +83,7 @@ namespace Orange_HRM_Pages
             return areVisible;
         }
 
-        public void ClickAddJobTitle() => AddJobTitleButton.Click();
+        public void ClickAddJobTitle() => AddButton.Click();
 
         public void AddJobTitleName(string text)
         {
@@ -102,7 +94,7 @@ namespace Orange_HRM_Pages
 
         public bool IsAddedJobTitleDisplayed(string text)
         {
-            var list = _driver.GetWait().Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(JobTitleTableList)).ToList();
+            var list = Driver.GetWait().Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(JobTitleTableList)).ToList();
 
             foreach (var item in list)
             {
@@ -117,7 +109,7 @@ namespace Orange_HRM_Pages
 
         private bool IsOptionAvailable(string text)
         {
-            var list = _driver.FindElements(Options).ToList();
+            var list = Driver.FindElements(Options).ToList();
 
             foreach (var item in list)
             {

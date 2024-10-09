@@ -6,10 +6,6 @@ namespace Wrappers
 {
     public class Button : HrmWebElement
     {
-        public Button(IWebElement element) : base(element)
-        {
-        }
-
         public Button(By locator) : base(locator)
         {
         }

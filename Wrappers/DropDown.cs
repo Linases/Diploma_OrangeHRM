@@ -8,10 +8,6 @@ namespace Wrappers
 {
     public class DropDown : HrmWebElement
     {
-        public DropDown(IWebElement webElement) : base(webElement)
-        {
-        }
-
         public DropDown(By locator) : base(locator)
         {
         }
