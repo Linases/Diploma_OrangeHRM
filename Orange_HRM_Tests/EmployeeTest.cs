@@ -10,15 +10,21 @@ namespace Orange_HRM_Tests
     [TestFixture]
     public class EmployeeTest : BaseTest
     {
-        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
         private EmployeePage _employeePage;
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
+
+        [SetUp]
+        public void Setup()
+        {
+            _leftPanelNavigationPage = new LeftPanelNavigationPage();
+        }
 
         [Test]
         public void AddNewEmployee()
         {
             _employeePage = LeftPanelNavigationPage.ClickPIM();
             _employeePage.ClickAddEmployee();
-            var headerTextAddEmployee = LeftPanelNavigationPage.GetAddEmployeeHeader();
+            var headerTextAddEmployee = _leftPanelNavigationPage.GetAddEmployeeHeader();
             Assert.That(headerTextAddEmployee, Is.EqualTo(PIMHeadersNames.AddEmployee));
             var employee = _employeePage.AddEmployeeData(Employee.Default);
             _ = Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Personaldetails));

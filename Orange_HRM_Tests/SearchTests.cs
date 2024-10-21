@@ -7,16 +7,22 @@ namespace Orange_HRM_Tests
     [TestFixture]
     public class SearchTests : BaseTest
     {
-        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
+       
+        [SetUp]
+        public void Setup()
+        {
+            _leftPanelNavigationPage = new LeftPanelNavigationPage();
+        }
 
         [Test]
         public void ValidateSearchFunctionality()
         {
             const string keyword = LeftNavigationMenuNames.Time;
-            var menuItemsBeforeSearch = LeftPanelNavigationPage.GetAllMenuItems();
+            var menuItemsBeforeSearch = _leftPanelNavigationPage.GetAllMenuItems();
             Assert.That(menuItemsBeforeSearch, Has.Count.EqualTo(LeftNavigationMenuNames.GetAllLeftNavigationMenuNames().Count));
-            LeftPanelNavigationPage.EnterSearchText(keyword);
-            var menuItemsAfterSearch = LeftPanelNavigationPage.GetAllMenuItems();
+            _leftPanelNavigationPage.EnterSearchText(keyword);
+            var menuItemsAfterSearch = _leftPanelNavigationPage.GetAllMenuItems();
             Assert.That(menuItemsAfterSearch, Is.EqualTo(new List<string> { keyword }).AsCollection);
         }
     }
