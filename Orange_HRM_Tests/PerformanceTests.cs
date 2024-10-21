@@ -18,7 +18,7 @@ namespace Orange_HRM_Tests
             _performancePage = LeftPanelNavigationPage.ClickPerformance();
             _performancePage.ClickConfigureTab();
             _performancePage.ClickKPIsTab();
-            _ = Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Kpi));
+            Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Kpi));
             var existingRecords = _performancePage.GetKPIRecords();
             _performancePage.ClickAddKpi();
             _performancePage.AddKpItext(KPINames.Analyze);
@@ -29,7 +29,7 @@ namespace Orange_HRM_Tests
             var isKPIWasAdded = _performancePage.IsAddedKPIDisplayed(KPINames.Analyze);
             Assert.That(isKPIWasAdded, Is.True, $"{KPINames.Analyze} was not added to the records");
             _performancePage.DeleteKPI(KPINames.Analyze);
-            _ = Driver.GetWait().Until(drv => _performancePage.IsAddedKPIDisplayed(KPINames.Analyze).Equals(false));
+            Driver.GetWait().Until(drv => _performancePage.IsAddedKPIDisplayed(KPINames.Analyze).Equals(false));
         }
     }
 }

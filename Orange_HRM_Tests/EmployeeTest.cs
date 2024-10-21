@@ -11,7 +11,7 @@ namespace Orange_HRM_Tests
     public class EmployeeTest : BaseTest
     {
         private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
-        private EmployeePage? _employeePage;
+        private EmployeePage _employeePage;
 
         [Test]
         public void AddNewEmployee()
