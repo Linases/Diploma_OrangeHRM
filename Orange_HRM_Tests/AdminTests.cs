@@ -7,15 +7,16 @@ namespace Orange_HRM_Tests
     [TestFixture]
     public class AdminTests : BaseTest
     {
-        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
         private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
 
         [SetUp]
         public void AdminSetup()
         {
-            _adminPage = LeftPanelNavigationPage.ClickAdmin();
+            _leftPanelNavigationPage = new LeftPanelNavigationPage();
+            _adminPage = _leftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]

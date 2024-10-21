@@ -9,13 +9,19 @@ namespace Orange_HRM_Tests
     [TestFixture]
     public class PerformanceTests : BaseTest
     {
-        private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
-        private PerformancePage? _performancePage;
+        private PerformancePage _performancePage;
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
+
+        [SetUp]
+        public void Setup()
+        {
+            _leftPanelNavigationPage = new LeftPanelNavigationPage();
+        }
 
         [Test]
         public void ValidatePerformanceManagementFunctionality()
         {
-            _performancePage = LeftPanelNavigationPage.ClickPerformance();
+            _performancePage = _leftPanelNavigationPage.ClickPerformance();
             _performancePage.ClickConfigureTab();
             _performancePage.ClickKPIsTab();
             Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Kpi));
