@@ -11,6 +11,7 @@ namespace Orange_HRM_Tests
         private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
 
         [SetUp]
         public void AdminSetup()

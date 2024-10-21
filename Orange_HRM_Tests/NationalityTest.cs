@@ -10,11 +10,18 @@ namespace Orange_HRM_Tests
         private AdminPage _adminPage;
         private readonly string _nationality = Nationalities.Afghan;
         private string _editedNationality;
+        private LeftPanelNavigationPage _leftPanelNavigationPage;
+
+        [SetUp]
+        public void Setup()
+        {
+            _leftPanelNavigationPage = new LeftPanelNavigationPage();
+        }
 
         [Test]
         public void ChangeNationality()
         {
-            _adminPage = LeftPanelNavigationPage.ClickAdmin();
+            _adminPage = _leftPanelNavigationPage.ClickAdmin();
             _adminPage.ClickNationalities();
             var isAnyNationalitiesDisplayed = _adminPage.IsAnyNationalitiesDisplayed();
             Assert.That(isAnyNationalitiesDisplayed, Is.True, "Nationalities are not displayed");
