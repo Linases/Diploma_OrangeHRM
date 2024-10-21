@@ -8,9 +8,9 @@ namespace Orange_HRM_Tests
     public class NationalityTest : BaseTest
     {
         private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
-        private AdminPage? _adminPage;
+        private AdminPage _adminPage;
         private readonly string _nationality = Nationalities.Afghan;
-        private string? _editedNationality;
+        private string _editedNationality;
 
         [Test]
         public void ChangeNationality()

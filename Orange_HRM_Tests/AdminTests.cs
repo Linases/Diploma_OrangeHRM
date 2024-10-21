@@ -8,10 +8,9 @@ namespace Orange_HRM_Tests
     public class AdminTests : BaseTest
     {
         private static LeftPanelNavigationPage LeftPanelNavigationPage => new();
-        private string? _newTitle;
+        private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
-
 
         [SetUp]
         public void AdminSetup()
