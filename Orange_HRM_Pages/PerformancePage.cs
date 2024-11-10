@@ -8,7 +8,7 @@ namespace Orange_HRM_Pages
         private By ConfirureTabLocator => By.XPath("//*[@aria-label='Topbar Menu']//*[text()='Configure ']");
         private By KPIsLocator => By.XPath("//*[@aria-label='Topbar Menu']//ul//*[text()='KPIs']");
         private By JobTitleSelect => By.XPath("//*[contains(@class,'select-text-input')]");
-        private By RecordsLocator => By.XPath("(//*[@class ='oxd-text oxd-text--span'])[1]");
+        private HrmWebElement Records => new HrmWebElement(By.XPath("(//*[@class ='oxd-text oxd-text--span'])[1]"));
         private TextBox KpiInput => new TextBox(By.XPath("(//label['Key Performance Indicator']/parent::*/following-sibling::*/input)[1]"));
         private Button ConfirureTab => new(ConfirureTabLocator);
         private Button KPIsTab => new(KPIsLocator);
@@ -38,8 +38,7 @@ namespace Orange_HRM_Pages
 
         public string GetKPIRecords()
         {
-            var records = new HrmWebElement(RecordsLocator);
-            string numbers = new string(records.Text.Where(char.IsDigit).ToArray());
+            string numbers = new string(Records.Text.Where(char.IsDigit).ToArray());
 
             return numbers;
         }
