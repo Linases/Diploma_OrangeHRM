@@ -17,7 +17,7 @@ namespace Orange_HRM_Pages
 
         public void ClickKPIsTab() => KPIsTab.ClickIfDisplayed(KPIsLocator);
 
-        public void ClickAddKpi() => AddButton.Click();
+        public void ClickAddKpi() => ClickAdd();
 
         public void AddKpItext(string text) => KpiInput.SendKeys(text);
 
@@ -34,7 +34,7 @@ namespace Orange_HRM_Pages
             selectDropdown.SendKeys(Keys.Enter);
         }
 
-        public new void ClickSaveButton() => SaveButton.Click();
+        public new void ClickSaveButton() => Save();
 
         public string GetKPIRecords()
         {

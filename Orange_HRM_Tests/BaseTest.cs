@@ -12,8 +12,9 @@ namespace Orange_HRM_Tests
     {
         protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
         protected readonly string MainUrl;
-        private static LoginPage LoginPage => new();
-        private static UserProfilePage UserProfilePage => new();
+        protected  LoginPage LoginPage => new();
+        private  UserProfilePage UserProfilePage => new();
+
 
         public BaseTest()
         {
