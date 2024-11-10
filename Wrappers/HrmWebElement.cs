@@ -12,7 +12,7 @@ namespace Wrappers
     {
         protected By By;
         protected readonly IWebDriver Driver = BrowserFactory.GetDriver(BrowserType.Chrome);
-        protected readonly IWebElement Element;
+        protected  IWebElement Element;
 
         public HrmWebElement(IWebElement element)
         {
@@ -27,6 +27,9 @@ namespace Wrappers
         public HrmWebElement(By by)
         {
             By = by;
+            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
+            var elements = Driver.FindElements(by);
+            Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         }
 
         public string Text => Element.Text;
