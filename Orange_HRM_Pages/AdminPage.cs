@@ -13,7 +13,7 @@ namespace Orange_HRM_Pages
         private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
         private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
         private By JobsTitles => By.XPath("//*[@class='oxd-dropdown-menu']/li/a[text()='Job Titles']");
-        private By JobTitleInput => By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]");
+        private TextBox JobTitleInput => new TextBox(By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]"));
         private Button Nationalities => new Button(By.XPath("//*[text()='Nationalities']"));
         private Button UserManagementButton => new Button(By.XPath("//*[text()='User Management ']"));
         private Button JobButton => new Button(By.XPath("//*[text()='Job ']"));
@@ -87,8 +87,7 @@ namespace Orange_HRM_Pages
 
         public void AddJobTitleName(string text)
         {
-            var title = new TextBox(JobTitleInput);
-            title.WaitoToEnterText(text, JobTitleInput);
+            JobTitleInput.EnterText(text);
             SaveButton.Click();
         }
 
