@@ -1,4 +1,5 @@
 ﻿using Constants;
+using Constants.TestSettings;
 
 namespace Orange_HRM_Modules
 {
@@ -8,7 +9,7 @@ namespace Orange_HRM_Modules
         public required string UserName { get; set; }
         public required string Password { get; set; }
 
-        public static User Admin
+        public User Admin
         {
             get
 
@@ -16,8 +17,8 @@ namespace Orange_HRM_Modules
                 return new User
                 {
                     Id = 1,
-                    UserName = ValidCredentials.UserName,
-                    Password = ValidCredentials.Password,
+                    UserName = TestSettings.AdminUserName,
+                    Password = TestSettings.AdminUserPassword,
                 };
             }
         }

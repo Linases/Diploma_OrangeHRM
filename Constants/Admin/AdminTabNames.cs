@@ -1,6 +1,6 @@
-﻿namespace Constants
+﻿namespace Constants.Admin
 {
-    public class AdminElementsNames
+    public class AdminTabNames
     {
         public const string UserManagement = "User Management";
         public const string Job = "Job";

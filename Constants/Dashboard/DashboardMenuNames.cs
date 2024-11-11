@@ -1,6 +1,6 @@
-﻿namespace Constants
+﻿namespace Constants.Dashboard
 {
-    public class DashboardElementsNames
+    public class DashboardMenusNames
     {
         public const string QuickLaunch = "Quick Launch";
     }

@@ -1,4 +1,6 @@
 ﻿using Constants;
+using Constants.Html;
+using Constants.Performance;
 using NUnit.Framework;
 using Orange_HRM_Pages;
 using SeleniumExtras.WaitHelpers;
@@ -27,15 +29,15 @@ namespace Orange_HRM_Tests
             Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Kpi));
             var existingRecords = _performancePage.GetKPIRecords();
             _performancePage.ClickAddKpi();
-            _performancePage.AddKpItext(KPINames.Analyze);
+            _performancePage.AddKpItext(KpiNames.Analyze);
             _performancePage.SelectJobTitle();
             _performancePage.ClickSaveButton();
             var existingRecordsAfterAdd = _performancePage.GetKPIRecords();
             Assert.That(existingRecordsAfterAdd, Is.Not.EqualTo(existingRecords));
-            var isKPIWasAdded = _performancePage.IsAddedKPIDisplayed(KPINames.Analyze);
-            Assert.That(isKPIWasAdded, Is.True, $"{KPINames.Analyze} was not added to the records");
-            _performancePage.DeleteKPI(KPINames.Analyze);
-            Driver.GetWait().Until(drv => _performancePage.IsAddedKPIDisplayed(KPINames.Analyze).Equals(false));
+            var isKPIWasAdded = _performancePage.IsAddedKPIDisplayed(KpiNames.Analyze);
+            Assert.That(isKPIWasAdded, Is.True, $"{KpiNames.Analyze} was not added to the records");
+            _performancePage.DeleteKPI(KpiNames.Analyze);
+            Driver.GetWait().Until(drv => _performancePage.IsAddedKPIDisplayed(KpiNames.Analyze).Equals(false));
         }
     }
 }
