@@ -1,4 +1,4 @@
-﻿namespace Constants
+﻿namespace Constants.Admin.Job
 {
     public class JobTabNames
     {

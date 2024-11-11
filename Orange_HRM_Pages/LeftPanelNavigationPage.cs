@@ -1,4 +1,6 @@
 ﻿using Constants;
+using Constants.Dashboard;
+using Constants.PIM;
 using OpenQA.Selenium;
 using Utilities;
 using Wrappers;
@@ -47,7 +49,7 @@ namespace Orange_HRM_Pages
 
         public string GetPIMHeader() => GetMenuName(LeftNavigationMenuNames.PIM);
 
-        public string GetAddEmployeeHeader() => GetMenuName(PIMHeadersNames.AddEmployee);
+        public string GetAddEmployeeHeader() => GetMenuName(PimTabNames.AddEmployee);
 
         public string GetDashboradHeader() => GetMenuName(LeftNavigationMenuNames.Dashboard);
 
@@ -66,7 +68,7 @@ namespace Orange_HRM_Pages
             return menuItems.Select(x => x.Text).ToList();
         }
 
-        public bool IsQuickLaunchAvailable() => IsElementAvailable(Dashboard, DashboardElementsNames.QuickLaunch);
+        public bool IsQuickLaunchAvailable() => IsElementAvailable(Dashboard, DashboardMenusNames.QuickLaunch);
 
         private bool IsElementAvailable(By locator, string text)
         {

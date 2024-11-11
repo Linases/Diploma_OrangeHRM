@@ -1,4 +1,7 @@
 ﻿using Constants;
+using Constants.Html;
+using Constants.TestSettings;
+using Constants.TestSettings.Enum;
 using FactoryPattern;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -14,11 +17,12 @@ namespace Orange_HRM_Tests
         protected readonly string MainUrl;
         protected  LoginPage LoginPage => new();
         private  UserProfilePage UserProfilePage => new();
+        protected TestSettings TestSettings => new();
 
 
         public BaseTest()
         {
-            MainUrl = "https://opensource-demo.orangehrmlive.com";
+            TestSettings.SetDefaultValues();
         }
 
         [SetUp]
@@ -43,11 +47,11 @@ namespace Orange_HRM_Tests
 
         private void SuccesfullLogin()
         {
-            Driver.Navigate().GoToUrl(MainUrl);
+            Driver.Navigate().GoToUrl(TestSettings.MainUrl);
             Driver.Manage().Window.Maximize();
             Assert.That(Driver.Title, Is.EqualTo("OrangeHRM"), "Login Page is not displayed");
             Assert.That(Driver.Url, Does.Contain(UrlPartsExisting.Login), "Login Page is not opened");
-            LoginPage.LoginAsAdministrator(User.Admin);
+            LoginPage.LoginAsAdministrator(TestSettings.AdminUserName, TestSettings.AdminUserPassword );
             Assert.That(Driver.Url, Does.Contain(UrlPartsExisting.Dashboard), "User was not redirected to it's dashboard");
         }
 
