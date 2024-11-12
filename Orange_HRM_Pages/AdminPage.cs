@@ -1,5 +1,4 @@
-﻿using Constants;
-using Constants.Admin.Job;
+﻿using Constants.Admin.Job;
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 using Utilities;
@@ -59,6 +58,7 @@ namespace Orange_HRM_Pages
         {
             By newName = By.XPath($"//div[(@class= 'oxd-table-cell oxd-padding-cell')and(contains(@style, 'flex-basis'))]/div[text()='{text}']");
             var value = new TextBox(newName);
+
             return value.WaitToGetText(newName);
         }
 

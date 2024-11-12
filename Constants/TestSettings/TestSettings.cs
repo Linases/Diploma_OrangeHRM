@@ -17,7 +17,7 @@ namespace Constants.TestSettings
 
         public static string AdminUserName { get; set; }
         public static string AdminUserPassword { get; set; }
-        public static string MainUrl { get; set; }
+        public string MainUrl { get; set; }
 
         public void SetDefaultValues()
         {

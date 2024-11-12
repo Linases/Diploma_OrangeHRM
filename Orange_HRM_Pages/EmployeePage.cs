@@ -30,6 +30,7 @@ namespace Orange_HRM_Pages
         public bool IsNameDisplayedCorrectly(string name)
         {
             var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
+
             return element.Equals(name);
         }
 
@@ -38,6 +39,7 @@ namespace Orange_HRM_Pages
         private bool IsTabOpen(HrmWebElement element)
         {
             var value = element.GetAttribute("class");
+
             return value.Contains("visited");
         }
     }

@@ -1,5 +1,5 @@
-﻿using Constants;
-using Constants.Dashboard;
+﻿using Constants.Dashboard;
+using Constants.LeftNavigation;
 using Constants.PIM;
 using OpenQA.Selenium;
 using Utilities;
@@ -18,7 +18,6 @@ namespace Orange_HRM_Pages
         private TextBox Search => new(By.XPath("//input[@placeholder='Search']"));
         private HrmWebElement MenuItems => new HrmWebElement(MenuItemsLocator);
         private DropDown DashboardElements => new(Dashboard);
-
 
         public bool AreDashboardElementsDisplayed() => DashboardElements.AllElementsAreDisplayed(Dashboard);
 
@@ -47,11 +46,9 @@ namespace Orange_HRM_Pages
 
         public string GetAdminHeader() => GetMenuName(LeftNavigationMenuNames.Admin);
 
-        public string GetPIMHeader() => GetMenuName(LeftNavigationMenuNames.PIM);
-
         public string GetAddEmployeeHeader() => GetMenuName(PimTabNames.AddEmployee);
 
-        public string GetDashboradHeader() => GetMenuName(LeftNavigationMenuNames.Dashboard);
+        public string GetDashboardHeader() => GetMenuName(LeftNavigationMenuNames.Dashboard);
 
         public void EnterSearchText(string text) => Search.SendKeys(text);
 
@@ -65,6 +62,7 @@ namespace Orange_HRM_Pages
             });
 
             var menuItems = Driver.FindElements(MenuItemsLocator).ToList();
+
             return menuItems.Select(x => x.Text).ToList();
         }
 
@@ -82,6 +80,7 @@ namespace Orange_HRM_Pages
                     return true;
                 }
             }
+
             return false;
         }
 

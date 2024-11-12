@@ -13,22 +13,15 @@ namespace Orange_HRM_Tests
     public class EmployeeTest : BaseTest
     {
         private EmployeePage _employeePage;
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
-
-        [SetUp]
-        public void Setup()
-        {
-            _leftPanelNavigationPage = new LeftPanelNavigationPage();
-        }
 
         [Test]
         public void AddNewEmployee()
         {
             _employeePage = LeftPanelNavigationPage.ClickPIM();
             _employeePage.ClickAddEmployee();
-            var headerTextAddEmployee = _leftPanelNavigationPage.GetAddEmployeeHeader();
+            var headerTextAddEmployee = LeftPanelNavigationPage.GetAddEmployeeHeader();
             Assert.That(headerTextAddEmployee, Is.EqualTo(PimTabNames.AddEmployee));
-            var employee = _employeePage.AddEmployeeData(Employee.Default);
+            var employee = _employeePage.AddEmployeeData(Employee.GetDefaultEmployee());
             _ = Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.PersonalDetails));
             var isEmployeeListTabOpen = _employeePage.IsEmployeeListTabOpen();
             var isNameCorrect = _employeePage.IsNameDisplayedCorrectly($"{employee.FirstName} {employee.Lastname}");

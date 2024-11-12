@@ -1,4 +1,4 @@
-﻿namespace Constants
+﻿namespace Constants.LeftNavigation
 {
     public class LeftNavigationMenuNames
     {
@@ -16,7 +16,7 @@
         public const string Buzz = "Buzz";
 
         public static List<string> GetAllLeftNavigationMenuNames() => new List<string>
-            {
+        {
             PIM,
             Admin,
             Dashboard,
@@ -29,6 +29,6 @@
             Maintenance,
             Claim,
             Buzz
-            };
+        };
     }
 }

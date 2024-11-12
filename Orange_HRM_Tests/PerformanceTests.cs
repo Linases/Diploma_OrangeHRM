@@ -1,5 +1,4 @@
-﻿using Constants;
-using Constants.Html;
+﻿using Constants.Html;
 using Constants.Performance;
 using NUnit.Framework;
 using Orange_HRM_Pages;
@@ -12,18 +11,11 @@ namespace Orange_HRM_Tests
     public class PerformanceTests : BaseTest
     {
         private PerformancePage _performancePage;
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
-
-        [SetUp]
-        public void Setup()
-        {
-            _leftPanelNavigationPage = new LeftPanelNavigationPage();
-        }
 
         [Test]
         public void ValidatePerformanceManagementFunctionality()
         {
-            _performancePage = _leftPanelNavigationPage.ClickPerformance();
+            _performancePage = LeftPanelNavigationPage.ClickPerformance();
             _performancePage.ClickConfigureTab();
             _performancePage.ClickKPIsTab();
             Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Kpi));
