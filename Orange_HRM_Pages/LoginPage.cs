@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using Orange_HRM_Modules;
 using Wrappers;
 
 namespace Orange_HRM_Pages

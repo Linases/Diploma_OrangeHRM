@@ -10,12 +10,11 @@ namespace Orange_HRM_Tests
         private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
-        private LeftPanelNavigationPage _leftPanelNavigationPage => new();
 
         [SetUp]
         public void AdminSetup()
         {
-            _adminPage = _leftPanelNavigationPage.ClickAdmin();
+            _adminPage = LeftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]

@@ -34,6 +34,7 @@ namespace Wrappers
         {
             var selectElement = new SelectElement(Element);
             var allElements = selectElement.Options;
+
             return allElements;
         }
 

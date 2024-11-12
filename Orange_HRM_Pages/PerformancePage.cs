@@ -32,9 +32,10 @@ namespace Orange_HRM_Pages
 
             selectDropdown.SendKeys(Keys.ArrowDown);
             selectDropdown.SendKeys(Keys.Enter);
+
         }
 
-        public new void ClickSaveButton() => Save();
+        public void ClickSaveButton() => Save();
 
         public string GetKPIRecords()
         {
@@ -48,6 +49,7 @@ namespace Orange_HRM_Pages
             try
             {
                 var addedKPI = Driver.FindElement(By.XPath($"//*[@class='oxd-table-card']//*[text() ='{text}']"));
+
                 return addedKPI.Displayed;
             }
             catch (NoSuchElementException)

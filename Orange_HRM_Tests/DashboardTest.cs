@@ -1,28 +1,19 @@
-﻿using Constants;
-using Constants.Html;
+﻿using Constants.Html;
+using Constants.LeftNavigation;
 using NUnit.Framework;
-using Orange_HRM_Pages;
 
 namespace Orange_HRM_Tests
 {
     [TestFixture]
     public class DashboardTest : BaseTest
     {
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
-
-        [SetUp]
-        public void Setup()
-        {
-            _leftPanelNavigationPage = new LeftPanelNavigationPage();
-        }
-
         [Test]
         public void DashboardAccessValidation()
         {
-            _leftPanelNavigationPage.ClickDashboard();
-            var headerTextDashboard = _leftPanelNavigationPage.GetDashboradHeader();
-            var areDashboardElementsDisplayed = _leftPanelNavigationPage.AreDashboardElementsDisplayed();
-            var isQuickLaunchAvailable = _leftPanelNavigationPage.IsQuickLaunchAvailable();
+            LeftPanelNavigationPage.ClickDashboard();
+            var headerTextDashboard = LeftPanelNavigationPage.GetDashboardHeader();
+            var areDashboardElementsDisplayed = LeftPanelNavigationPage.AreDashboardElementsDisplayed();
+            var isQuickLaunchAvailable = LeftPanelNavigationPage.IsQuickLaunchAvailable();
             Assert.Multiple(() =>
             {
                 Assert.That(headerTextDashboard, Is.EqualTo(LeftNavigationMenuNames.Dashboard), "Dashoboard header is not shown");

@@ -30,42 +30,49 @@ namespace Utilities
         };
             var exceptions = exceptionsToIgnore ?? exceptionsToIgnoreByDefault;
             wait.IgnoreExceptionTypes(exceptions);
+
             return wait;
         }
 
         public static IList<IWebElement> GetWaitForElementsVisible(this IWebDriver driver, By locator)
         {
             var wait = driver.GetWait();
+
             return wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
         }
 
         public static IWebElement GetWaitForElementIsVisible(this IWebDriver driver, By locator)
         {
             var wait = driver.GetWait();
+
             return wait.Until(ExpectedConditions.ElementIsVisible(locator));
         }
 
         public static IWebElement GetWaitForElementIsClicable(this IWebDriver driver, By locator)
         {
             var wait = driver.GetWait();
+
             return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
         }
 
         public static IWebElement WaitForElementIsVisible(this IWebDriver driver, By locator, int timeoutInSeconds = 20)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+
             return wait.Until(ExpectedConditions.ElementIsVisible(locator));
         }
 
         public static IList<IWebElement> WaitForElementsVisible(this IWebDriver driver, By locator, int timeoutInSeconds = 30)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+
             return wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(locator));
         }
 
         public static IWebElement WaitForElementIsClicable(this IWebDriver driver, By locator, int timeoutInSeconds = 20)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+
             return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
         }
     }

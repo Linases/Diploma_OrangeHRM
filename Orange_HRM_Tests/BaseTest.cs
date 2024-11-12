@@ -14,10 +14,10 @@ namespace Orange_HRM_Tests
     public class BaseTest
     {
         protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
-        protected readonly string MainUrl;
         protected  LoginPage LoginPage => new();
         private  UserProfilePage UserProfilePage => new();
         protected TestSettings TestSettings => new();
+        protected LeftPanelNavigationPage LeftPanelNavigationPage;
 
 
         public BaseTest()
@@ -29,6 +29,7 @@ namespace Orange_HRM_Tests
         public void OneTimeSetUp()
         {
             SuccesfullLogin();
+            LeftPanelNavigationPage = new LeftPanelNavigationPage();
         }
 
         [TearDown]

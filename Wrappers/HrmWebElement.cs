@@ -64,6 +64,7 @@ namespace Wrappers
         {
             var seleiumWebElement = Element.FindElement(by);
             var myWebElement = new HrmWebElement(seleiumWebElement);
+
             return myWebElement;
         }
 
@@ -73,6 +74,7 @@ namespace Wrappers
             var myWebElements = seleniumWebElements
                 .Select(element => (IWebElement)new HrmWebElement(element))
                 .ToList();
+
             return myWebElements.AsReadOnly();
         }
 
@@ -87,12 +89,14 @@ namespace Wrappers
                 else
                 {
                     var isDisplayed = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator)).Displayed;
+
                     return isDisplayed;
                 }
             }
             catch (NoSuchElementException)
             {
                 Console.WriteLine("Element not found.");
+
                 return false;
             }
         }
@@ -100,18 +104,21 @@ namespace Wrappers
         public bool AllElementsAreDisplayed(By locator)
         {
             var list = Driver.GetWaitForElementsVisible(locator);
+
             return list.All(x => x.Displayed);
         }
 
         public string WaitToGetText(By locator)
         {
             var element = WaitHelper.GetWait(Driver, 30, 15).Until(ExpectedConditions.ElementIsVisible(locator));
+
             return element.Text;
         }
 
         public string GetTextToBePresentInElement(IWebElement element, string text)
         {
             Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
+
             return Element.Text;
         }
 
@@ -120,6 +127,7 @@ namespace Wrappers
         public bool IsAvailableToClickButton(By locator)
         {
             Driver.WaitForElementIsVisible(locator);
+
             return Element.Enabled && Element.Displayed;
         }
     }
