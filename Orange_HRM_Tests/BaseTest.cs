@@ -1,17 +1,14 @@
-﻿using Constants;
-using Constants.Html;
+﻿using Constants.Html;
 using Constants.TestSettings;
 using Constants.TestSettings.Enum;
 using FactoryPattern;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Orange_HRM_Modules;
 using Orange_HRM_Pages;
 
 namespace Orange_HRM_Tests
 {
-    [TestFixture]
-    public class BaseTest
+   public class BaseTest
     {
         protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
         protected  LoginPage LoginPage => new();

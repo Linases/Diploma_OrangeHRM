@@ -23,7 +23,7 @@ namespace Wrappers
         public HrmWebElement(By by)
         {
             By = by;
-            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
+          WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
             var elements = Driver.FindElements(by);
             Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         }
@@ -78,21 +78,15 @@ namespace Wrappers
             return myWebElements.AsReadOnly();
         }
 
-        public bool IsElementDisplayed(By locator)
+        public bool IsElementDisplayed()
         {
             try
             {
-                if (locator == null)
-                {
-                    throw new ArgumentNullException(nameof(locator));
-                }
-                else
-                {
-                    var isDisplayed = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(locator)).Displayed;
+                var isDisplayed = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(By)).Displayed;
 
-                    return isDisplayed;
-                }
+                return isDisplayed;
             }
+
             catch (NoSuchElementException)
             {
                 Console.WriteLine("Element not found.");
@@ -101,9 +95,9 @@ namespace Wrappers
             }
         }
 
-        public bool AllElementsAreDisplayed(By locator)
+        public bool AllElementsAreDisplayed()
         {
-            var list = Driver.GetWaitForElementsVisible(locator);
+            var list = Driver.GetWaitForElementsVisible(By);
 
             return list.All(x => x.Displayed);
         }
@@ -122,11 +116,13 @@ namespace Wrappers
             return Element.Text;
         }
 
-        public void WaitForElementIsNotDisplayed(By locator) => Driver.GetWait().Until(x => !IsElementDisplayed(locator));
+        public void WaitForElementIsNotDisplayed() => Driver.GetWait().Until(x => !Element.Displayed);
 
-        public bool IsAvailableToClickButton(By locator)
+        public void WaitForElementIsDisplayed() => Driver.GetWait().Until(x => IsElementDisplayed( ));
+
+        public bool IsElementClicable()
         {
-            Driver.WaitForElementIsVisible(locator);
+            Driver.WaitForElementIsVisible(By);
 
             return Element.Enabled && Element.Displayed;
         }

@@ -10,16 +10,16 @@ namespace Wrappers
         {
         }
 
-        public void ClickWhenClicable(By locator)
+        public void ClickWhenClicable()
         {
-            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(locator)).Click();
+            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(By)).Click();
         }
 
-        public void ClickIfDisplayed(By locator)
+        public void ClickIfDisplayed()
         {
             try
             {
-                _ = WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(locator));
+                WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(By));
                 if (Element.Displayed)
                 {
                     Click();
@@ -27,7 +27,7 @@ namespace Wrappers
             }
             catch (WebDriverTimeoutException)
             {
-                Console.WriteLine($"Element with {locator} did not appear within the specified time.");
+                Console.WriteLine($"Element with {By} did not appear within the specified time.");
             }
         }
     }

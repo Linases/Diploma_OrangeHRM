@@ -21,8 +21,8 @@ namespace Orange_HRM_Tests
             _adminPage.ClickEditButton(_nationality);
             _editedNationality = _nationality.Substring(0, _nationality.Length - 1);
             _adminPage.EditName(_editedNationality);
-            var newName = _adminPage.GetChangedName(_editedNationality);
-            Assert.That(newName, Is.EqualTo(_editedNationality));
+            var newName = _adminPage.IsDisplayedInTable(_editedNationality);
+            Assert.That(newName, Is.True);
         }
 
         [TearDown]
@@ -35,8 +35,8 @@ namespace Orange_HRM_Tests
         {
             _adminPage.ClickEditButton(_editedNationality);
             _adminPage.EditName(_nationality);
-            var newName = _adminPage.GetChangedName(_nationality);
-            Assert.That(newName, Is.EqualTo(_nationality));
+            var newName = _adminPage.IsDisplayedInTable(_nationality);
+            Assert.That(newName, Is.True);
         }
     }
 }
