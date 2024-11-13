@@ -19,7 +19,7 @@ namespace Orange_HRM_Pages
         private HrmWebElement MenuItems => new HrmWebElement(MenuItemsLocator);
         private DropDown DashboardElements => new(Dashboard);
 
-        public bool AreDashboardElementsDisplayed() => DashboardElements.AllElementsAreDisplayed(Dashboard);
+        public bool AreDashboardElementsDisplayed() => DashboardElements.AllElementsAreDisplayed();
 
         public EmployeePage ClickPIM()
         {
@@ -56,7 +56,7 @@ namespace Orange_HRM_Pages
         {
             Driver.GetWait().Until(x =>
             {
-                MenuItems.AllElementsAreDisplayed(MenuItemsLocator);
+                MenuItems.AllElementsAreDisplayed();
 
                 return true;
             });

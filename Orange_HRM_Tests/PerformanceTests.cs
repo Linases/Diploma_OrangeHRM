@@ -26,10 +26,11 @@ namespace Orange_HRM_Tests
             _performancePage.ClickSaveButton();
             var existingRecordsAfterAdd = _performancePage.GetKPIRecords();
             Assert.That(existingRecordsAfterAdd, Is.Not.EqualTo(existingRecords));
-            var isKPIWasAdded = _performancePage.IsAddedKPIDisplayed(KpiNames.Analyze);
-            Assert.That(isKPIWasAdded, Is.True, $"{KpiNames.Analyze} was not added to the records");
-            _performancePage.DeleteKPI(KpiNames.Analyze);
-            Driver.GetWait().Until(drv => _performancePage.IsAddedKPIDisplayed(KpiNames.Analyze).Equals(false));
+            var isKpiAdded = _performancePage.IsDisplayedInTable(KpiNames.Analyze);
+            Assert.That(isKpiAdded, Is.True, $"{KpiNames.Analyze} was not added to the records");
+            _performancePage.ClickTrashIcon(KpiNames.Analyze);
+            var isKpiDeleted = _performancePage.IsDisplayedInTable(KpiNames.Analyze);
+            Assert.That(isKpiDeleted, Is.False, $"{KpiNames.Analyze} was not removed from the records");
         }
     }
 }

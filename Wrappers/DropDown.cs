@@ -8,9 +8,14 @@ namespace Wrappers
 {
     public class DropDown : HrmWebElement
     {
-        public DropDown(By locator) : base(locator)
+        private HrmWebElement DropDownElement => new(By);
+
+        public DropDown(By by) : base(by)
         {
+            By = by;
         }
+
+        public void ClickDropDown() => DropDownElement.Click();
 
         public void SelectByText(string text)
         {

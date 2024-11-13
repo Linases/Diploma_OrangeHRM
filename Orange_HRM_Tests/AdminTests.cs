@@ -39,11 +39,11 @@ namespace Orange_HRM_Tests
             _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";
             _adminPage.ClickJob();
             _adminPage.SelectJobTitlesButton();
-            var isJobTitlesTableVisible = _adminPage.AreJobTitilesItemsVisible();
+            var isJobTitlesTableVisible = _adminPage.AreJobTitlesItemsVisible();
             Assert.That(isJobTitlesTableVisible, Is.True, "Job Titles table is not visible");
             _adminPage.ClickAddJobTitle();
             _adminPage.AddJobTitleName(_newTitle);
-            var isAddedJobDisplayed = _adminPage.IsAddedJobTitleDisplayed(_newTitle);
+            var isAddedJobDisplayed = _adminPage.IsDisplayedInTable(_newTitle);
             Assert.That(isAddedJobDisplayed, Is.True);
             _needToDelete = true;
         }
@@ -54,7 +54,7 @@ namespace Orange_HRM_Tests
             if (_needToDelete)
             {
                 _needToDelete = false;
-                _adminPage.ClickDeleteButton(_newTitle);
+                _adminPage.ClickTrashIcon(_newTitle);
             }
         }
     }

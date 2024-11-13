@@ -12,14 +12,14 @@ namespace Orange_HRM_Pages
         private DropDown UserProfileMenuDropdown => new DropDown(UserProfileMenu);
         private Button LogoutButton => new Button(Logout);
 
-        public void ClickUserProfileDropdown() => UserProfileButton.ClickWhenClicable(UserProfile);
+        public void ClickUserProfileDropdown() => UserProfileButton.ClickWhenClicable();
 
         public bool IsUserProfileDropdownMenuDisplayed()
         {
-            var isDisplayed = UserProfileMenuDropdown.AllElementsAreDisplayed(UserProfileMenu);
+            var isDisplayed = UserProfileMenuDropdown.AllElementsAreDisplayed();
             return isDisplayed;
         }
 
-        public void ClickLogout() => LogoutButton.ClickWhenClicable(Logout);
+        public void ClickLogout() => LogoutButton.ClickWhenClicable();
     }
 }
