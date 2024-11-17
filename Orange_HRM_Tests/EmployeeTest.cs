@@ -22,7 +22,7 @@ namespace Orange_HRM_Tests
             var headerTextAddEmployee = LeftPanelNavigationPage.GetAddEmployeeHeader();
             Assert.That(headerTextAddEmployee, Is.EqualTo(PimTabNames.AddEmployee));
             var employee = _employeePage.AddEmployeeData(Employee.GetDefaultEmployee());
-            _ = Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.PersonalDetails));
+            Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.PersonalDetails));
             var isEmployeeListTabOpen = _employeePage.IsEmployeeListTabOpen();
             var isNameCorrect = _employeePage.IsNameDisplayedCorrectly($"{employee.FirstName} {employee.Lastname}");
             Assert.Multiple(() =>

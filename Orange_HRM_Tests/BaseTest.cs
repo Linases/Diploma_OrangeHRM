@@ -4,6 +4,7 @@ using Constants.TestSettings.Enum;
 using FactoryPattern;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using Orange_HRM_Modules;
 using Orange_HRM_Pages;
 
 namespace Orange_HRM_Tests
@@ -49,7 +50,7 @@ namespace Orange_HRM_Tests
             Driver.Manage().Window.Maximize();
             Assert.That(Driver.Title, Is.EqualTo("OrangeHRM"), "Login Page is not displayed");
             Assert.That(Driver.Url, Does.Contain(UrlPartsExisting.Login), "Login Page is not opened");
-            LoginPage.LoginAsAdministrator(TestSettings.AdminUserName, TestSettings.AdminUserPassword );
+            LoginPage.LoginAsAdministrator(User.GetAdminUser().UserName, User.GetAdminUser().Password );
             Assert.That(Driver.Url, Does.Contain(UrlPartsExisting.Dashboard), "User was not redirected to it's dashboard");
         }
 

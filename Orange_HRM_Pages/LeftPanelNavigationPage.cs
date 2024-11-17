@@ -44,8 +44,6 @@ namespace Orange_HRM_Pages
             return new PerformancePage();
         }
 
-        public string GetAdminHeader() => GetMenuName(LeftNavigationMenuNames.Admin);
-
         public string GetAddEmployeeHeader() => GetMenuName(PimTabNames.AddEmployee);
 
         public string GetDashboardHeader() => GetMenuName(LeftNavigationMenuNames.Dashboard);
@@ -54,16 +52,11 @@ namespace Orange_HRM_Pages
 
         public List<string> GetAllMenuItems()
         {
-            Driver.GetWait().Until(x =>
-            {
-                MenuItems.AllElementsAreDisplayed();
-
-                return true;
-            });
-
+            Driver.GetWait().Until(x => MenuItems.AllElementsAreDisplayed());
             var menuItems = Driver.FindElements(MenuItemsLocator).ToList();
+            var allItems = menuItems.Select(x => x.Text).ToList();
 
-            return menuItems.Select(x => x.Text).ToList();
+            return allItems;
         }
 
         public bool IsQuickLaunchAvailable() => IsElementAvailable(Dashboard, DashboardMenusNames.QuickLaunch);

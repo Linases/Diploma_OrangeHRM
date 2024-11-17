@@ -9,18 +9,12 @@ namespace Orange_HRM_Modules
         public required string UserName { get; set; }
         public required string Password { get; set; }
 
-        public User Admin
-        {
-            get
-
+        public static User GetAdminUser() =>
+            new()
             {
-                return new User
-                {
-                    Id = 1,
-                    UserName = TestSettings.AdminUserName,
-                    Password = TestSettings.AdminUserPassword,
-                };
-            }
-        }
+                Id = 1,
+                UserName = TestSettings.AdminUserName,
+                Password = TestSettings.AdminUserPassword,
+            };
     }
 }

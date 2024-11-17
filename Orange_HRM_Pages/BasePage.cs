@@ -1,65 +1,57 @@
 ﻿using Constants.TestSettings.Enum;
 using FactoryPattern;
 using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
-using Utilities;
 using Wrappers;
 
 namespace Orange_HRM_Pages
 {
     public class BasePage
     {
-        protected By TableList => By.XPath("//*[@class='oxd-table-card']");
+        protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
+        protected const string TableListLocator = "//*[@class='oxd-table-card']";
         private const string ElementInTableLocator = "//*[text()='{0}']/parent::*/following-sibling::*//i";
 
-        protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
-        protected By SpinnerLocator = By.XPath("//*[@class='oxd-loading-spinner']");
-
-        protected  Button AddButton => new(By.XPath("//button[text()=' Add ']"));
-        protected  Button SaveButton => new(By.XPath("//button[text()=' Save ']"));
-        protected  Button VerifyDeleteButton => new(By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']"));
-        protected HrmWebElement Spinner => new HrmWebElement(SpinnerLocator);
+        protected Button AddButton => new(By.XPath("//button[text()=' Add ']"));
+        private Button SaveButton => new(By.XPath("//button[text()=' Save ']"));
+        private Button VerifyDeleteButton => new(By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']"));
 
         public bool IsDisplayedInTable(string itemName)
         {
             try
             {
-               var itemInTable = new HrmWebElement( By.XPath($"//*[@class='oxd-table-card']//*[text()='{itemName}']"));
+                var itemInTable = new HrmWebElement(By.XPath($"{TableListLocator}//*[text()='{itemName}']"));
                 return itemInTable.Text.Equals(itemName);
             }
             catch (WebDriverTimeoutException)
             {
-               return false;
+                return false;
             }
         }
 
-        public void ClickAdd() => AddButton.Click();
+        protected void ClickAdd() => AddButton.ClickWhenClicable();
 
-        public void Save()
+        protected void Save()
         {
-            SaveButton.Click();
+            SaveButton.ClickWhenClicable();
             SaveButton.WaitForElementIsDisplayed();
         }
 
         public void ClickEditButton(string title)
         {
-            var editButton = new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-pencil-fill']"));
+            var editButton =
+                new Button(By.XPath(
+                    $"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-pencil-fill']"));
             editButton.Click();
         }
 
         public void ClickTrashIcon(string title)
         {
-            var trashIcon = new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-trash']"));
-            trashIcon.Click();
+            var trashIcon =
+                new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-trash']"));
+            trashIcon.ClickWhenClicable();
             VerifyDeleteToaster();
         }
 
-        public void WaitForSpinnerIsNotVisible() => Spinner.WaitForElementIsNotDisplayed();
-
-        public void VerifyDeleteToaster()
-        {
-            //Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(VerifyDelete));
-            VerifyDeleteButton.ClickWhenClicable();
-        }
+        private void VerifyDeleteToaster() => VerifyDeleteButton.ClickWhenClicable();
     }
 }

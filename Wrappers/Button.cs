@@ -6,29 +6,18 @@ namespace Wrappers
 {
     public class Button : HrmWebElement
     {
-        public Button(By locator) : base(locator)
+        private Button ButtonElement => new(By);
+
+        public Button(By by) : base(by)
         {
         }
 
-        public void ClickWhenClicable()
-        {
-            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(By)).Click();
-        }
+        public void ClickWhenClicable() => Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(By)).Click();
 
         public void ClickIfDisplayed()
         {
-            try
-            {
-                WaitHelper.GetWait(Driver, 10, 200).Until(ExpectedConditions.ElementIsVisible(By));
-                if (Element.Displayed)
-                {
-                    Click();
-                }
-            }
-            catch (WebDriverTimeoutException)
-            {
-                Console.WriteLine($"Element with {By} did not appear within the specified time.");
-            }
+            WaitForElementIsDisplayed();
+            ButtonElement.Click();
         }
     }
 }
