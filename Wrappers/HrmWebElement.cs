@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
-using Constants;
 using Constants.TestSettings.Enum;
 using FactoryPattern;
 using OpenQA.Selenium;
@@ -13,12 +12,7 @@ namespace Wrappers
     {
         protected By By;
         protected readonly IWebDriver Driver = BrowserFactory.GetDriver(BrowserType.Chrome);
-        protected  IWebElement Element;
-
-        public HrmWebElement(IWebElement element)
-        {
-            Element = element;
-        }
+        protected IWebElement? Element;
 
         public HrmWebElement(By locator)
         {
@@ -28,9 +22,11 @@ namespace Wrappers
         public HrmWebElement(By by)
         {
             By = by;
-          WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
+            Driver.GetWait().Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));
             var elements = Driver.FindElements(by);
-            Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
+            Element = elements.Count > 0
+                ? elements.FirstOrDefault()
+                : throw new NoSuchElementException("Element not found.");
         }
 
         public string Text => Element.Text;
@@ -67,8 +63,8 @@ namespace Wrappers
 
         public IWebElement FindElement(By by)
         {
-            var seleiumWebElement = Element.FindElement(by);
-            var myWebElement = new HrmWebElement(seleiumWebElement);
+            Element.FindElement(by);
+            var myWebElement = new HrmWebElement(by);
 
             return myWebElement;
         }
@@ -77,17 +73,17 @@ namespace Wrappers
         {
             var seleniumWebElements = Element.FindElements(by);
             var myWebElements = seleniumWebElements
-                .Select(element => (IWebElement)new HrmWebElement(element))
+                .Select(element => (IWebElement)new HrmWebElement(by))
                 .ToList();
 
             return myWebElements.AsReadOnly();
         }
 
-        public bool IsElementDisplayed()
+        private bool IsElementDisplayed()
         {
             try
             {
-                var isDisplayed = WaitHelper.GetWait(Driver).Until(ExpectedConditions.ElementIsVisible(By)).Displayed;
+                var isDisplayed = Driver.GetWait().Until(ExpectedConditions.ElementIsVisible(By)).Displayed;
 
                 return isDisplayed;
             }
@@ -103,33 +99,19 @@ namespace Wrappers
         public bool AllElementsAreDisplayed()
         {
             var list = Driver.GetWaitForElementsVisible(By);
+            var displayedList = list.All(x => x.Displayed);
 
-            return list.All(x => x.Displayed);
+            return displayedList;
         }
 
-        public string WaitToGetText(By locator)
+        public string GetTextToBePresentInElement( string text)
         {
-            var element = WaitHelper.GetWait(Driver, 30, 15).Until(ExpectedConditions.ElementIsVisible(locator));
 
-            return element.Text;
-        }
-
-        public string GetTextToBePresentInElement(IWebElement element, string text)
-        {
-            Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElement(element, text)); ;
+            Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElementLocated(By, text));
 
             return Element.Text;
         }
 
-        public void WaitForElementIsNotDisplayed() => Driver.GetWait().Until(x => !Element.Displayed);
-
-        public void WaitForElementIsDisplayed() => Driver.GetWait().Until(x => IsElementDisplayed( ));
-
-        public bool IsElementClicable()
-        {
-            Driver.WaitForElementIsVisible(By);
-
-            return Element.Enabled && Element.Displayed;
-        }
+        public void WaitForElementIsDisplayed() => Driver.GetWait().Until(x => IsElementDisplayed());
     }
 }

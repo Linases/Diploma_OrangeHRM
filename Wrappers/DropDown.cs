@@ -3,49 +3,20 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using Utilities;
 
-
 namespace Wrappers
 {
     public class DropDown : HrmWebElement
     {
-        private HrmWebElement DropDownElement => new(By);
+        private DropDown DropDownElement => new(By);
 
         public DropDown(By by) : base(by)
         {
             By = by;
         }
 
-        public void ClickDropDown() => DropDownElement.Click();
-
-        public void SelectByText(string text)
+        public void SelectFromListByValue(string value)
         {
-            var selectElement = new SelectElement(Element);
-            selectElement.SelectByText(text);
-        }
-
-        public void SelectByValue(string value)
-        {
-            var selectElement = new SelectElement(Element);
-            selectElement.SelectByValue(value);
-        }
-
-        public void SelectByIndex(int index)
-        {
-            var selectElement = new SelectElement(Element);
-            selectElement.SelectByIndex(index);
-        }
-
-        public IList<IWebElement> GetOptions()
-        {
-            var selectElement = new SelectElement(Element);
-            var allElements = selectElement.Options;
-
-            return allElements;
-        }
-
-        public void SelectFromListByValue(By locator, string value)
-        {
-            var list = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
+            var list = Driver.GetWait().Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By));
             if (list.Count > 0)
             {
                 var elementValue = list.Select(element => new SelectElement(Element)).ToList();

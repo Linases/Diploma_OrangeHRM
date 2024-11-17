@@ -1,6 +1,5 @@
 ﻿using Constants.Admin.Job;
 using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
 using Utilities;
 using Wrappers;
 
@@ -8,7 +7,6 @@ namespace Orange_HRM_Pages
 {
     public class AdminPage : BasePage
     {
-
         private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
         private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
         private By NationalityName => By.XPath("//div[@class='oxd-form-row']//input[@class='oxd-input oxd-input--active']");
@@ -27,6 +25,7 @@ namespace Orange_HRM_Pages
         public bool IsAnyNationalitiesDisplayed()
         {
             var list = Driver.GetWaitForElementsVisible(By.XPath("//*[@class='oxd-table-body']/div")).Where(x => x.Displayed).ToList();
+
             return list.Count > 0;
         }
 
@@ -50,7 +49,7 @@ namespace Orange_HRM_Pages
 
         public bool AreJobTitlesItemsVisible()
         {
-            var table = new DropDown(TableList);
+            var table = new DropDown(By.XPath($"{TableListLocator}"));
             var areVisible = table.AllElementsAreDisplayed();
 
             return areVisible;
@@ -76,6 +75,7 @@ namespace Orange_HRM_Pages
                     return true;
                 }
             }
+
             return false;
         }
     }
