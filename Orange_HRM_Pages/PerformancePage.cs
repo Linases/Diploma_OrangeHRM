@@ -1,20 +1,23 @@
-﻿using OpenQA.Selenium;
+﻿using Constants.Performance;
+using OpenQA.Selenium;
 using Wrappers;
 
 namespace Orange_HRM_Pages
 {
     public class PerformancePage : BasePage
     {
-        private DropDown JobTitleDropdown => new(By.XPath("//*[contains(@class,'select-text-input')]"));
-        private HrmWebElement DropdownArrowUp => new(By.XPath("//*[@class='oxd-select-text oxd-select-text--focus']"));
+        private const string ConfigureTabLocation = "//*[.='Configure ']";
+
+        private DropDown JobTitleInput => new(By.XPath("//*[contains(@class,'select-text-input')]"));
+        private DropDown JobTitleDropdown => new(By.XPath("//*[contains(@class,'select-dropdown')]/*"));
         private HrmWebElement Records => new(By.XPath("(//*[@class ='oxd-text oxd-text--span'])[1]"));
         private TextBox KpiInput => new(By.XPath("(//label['Key Performance Indicator']/parent::*/following-sibling::*/input)[1]"));
-        private Button ConfigureTab => new(By.XPath("//*[@aria-label='Topbar Menu']//*[text()='Configure ']"));
-        private Button KPIsTab => new(By.XPath("//*[@aria-label='Topbar Menu']//ul//*[text()='KPIs']"));
+        private Button ConfigureTab => new(By.XPath($"{ConfigureTabLocation}"));
+        private DropDown ConfigureDropdownMenu => new(By.XPath($"{ConfigureTabLocation}/./following-sibling::*/li/a"));
 
         public void ClickConfigureTab() => ConfigureTab.ClickWhenClicable();
 
-        public void ClickKPIsTab() => KPIsTab.ClickIfDisplayed();
+        public void ClickKPIsTab() => ConfigureDropdownMenu.SelectByTextValue(ConfigureMenuNames.KPIs);
 
         public void ClickAddKpi() => ClickAdd();
 
@@ -22,17 +25,16 @@ namespace Orange_HRM_Pages
 
         public void SelectJobTitle()
         {
-            JobTitleDropdown.Click();
-            DropdownArrowUp.WaitForElementIsDisplayed();
-            JobTitleDropdown.SendKeys(Keys.ArrowDown);
-            JobTitleDropdown.SendKeys(Keys.Enter);
+            JobTitleInput.Click();
+            JobTitleDropdown.WaitForElementIsDisplayed();
+            JobTitleDropdown.SelectLastOption();
         }
 
         public void ClickSaveButton() => Save();
 
         public string GetKPIRecords()
         {
-            string numbers = new string(Records.Text.Where(char.IsDigit).ToArray());
+            var numbers = new string(Records.Text.Where(char.IsDigit).ToArray());
 
             return numbers;
         }

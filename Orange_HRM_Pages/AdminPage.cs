@@ -1,4 +1,5 @@
-﻿using Constants.Admin.Job;
+﻿using Constants.Admin;
+using Constants.Admin.Job;
 using OpenQA.Selenium;
 using Utilities;
 using Wrappers;
@@ -7,18 +8,17 @@ namespace Orange_HRM_Pages
 {
     public class AdminPage : BasePage
     {
-        private By TopBarMenuItems => By.XPath("//*[@aria-label='Topbar Menu']//li");
-        private By Options => By.XPath("//*[@class='oxd-dropdown-menu']/li/a");
-        private By NationalityName => By.XPath("//div[@class='oxd-form-row']//input[@class='oxd-input oxd-input--active']");
+        private const string JobsTabLocator = "//*[text()='Job ']";
+        private const string UserManagementTabLocator = "//*[text()='User Management ']";
+
         private TextBox JobTitleTextBox => new(By.XPath("//*[@class='oxd-form-row']//input[contains(@class,'oxd-input')]"));
         private Button Nationalities => new(By.XPath("//*[text()='Nationalities']"));
-        private Button UserManagementButton => new(By.XPath("//*[text()='User Management ']"));
-        private Button JobButton => new(By.XPath("//*[text()='Job ']"));
-        private DropDown OptionsAvailable => new(Options);
-        private TextBox NationalityNameInput => new(NationalityName);
+        private Button UserManagementButton => new(By.XPath($"{UserManagementTabLocator}"));
+        private Button JobButton => new(By.XPath($"{JobsTabLocator}"));
+        private TextBox NationalityNameInput => new(By.XPath("//div[@class='oxd-form-row']//input[@class='oxd-input oxd-input--active']"));
         private new Button SaveButton => new(By.XPath("//button[@type='submit']"));
-        private Button AdminOptions => new(TopBarMenuItems);
-        private Button JobTitles => new(By.XPath("//*[@class='oxd-dropdown-menu']/li/a[text()='Job Titles']"));
+        private Button AdminOptions => new(By.XPath("//*[@aria-label='Topbar Menu']//li"));
+        private DropDown JobDropdownMenu => new(By.XPath($"{JobsTabLocator}/following-sibling::*/li/a"));
 
         public void ClickNationalities() => Nationalities.Click();
 
@@ -31,7 +31,7 @@ namespace Orange_HRM_Pages
 
         public void EditName(string text)
         {
-            NationalityNameInput.DeleteAndEnterText(text, NationalityName);
+            NationalityNameInput.DeleteAndEnterText(text);
             SaveButton.Click();
         }
 
@@ -41,11 +41,20 @@ namespace Orange_HRM_Pages
 
         public void ClickJob() => JobButton.Click();
 
-        public bool AreOptionsDisplayed() => OptionsAvailable.AllElementsAreDisplayed();
+        public bool AreOptionsDisplayed(string option)
+        {
+            var options = GetOptionsDisplayed(option);
+            if (options.Count > 0)
+            {
+                return true;
+            }
 
-        public bool IsJobTitleAvailable() => IsOptionAvailable(JobTabNames.JobTitles);
+            return false;
+        }
 
-        public void SelectJobTitlesButton() => JobTitles.Click();
+        public bool IsJobTitleAvailable() => IsOptionAvailable(AdminTabNames.Job,JobTabNames.JobTitles);
+
+        public void SelectJobTitlesButton() => JobDropdownMenu.SelectByTextValue(JobTabNames.JobTitles);
 
         public bool AreJobTitlesItemsVisible()
         {
@@ -63,20 +72,14 @@ namespace Orange_HRM_Pages
             SaveButton.Click();
         }
 
-        private bool IsOptionAvailable(string text)
+        private List <string> GetOptionsDisplayed(string option)
         {
-            var list = Driver.FindElements(Options).ToList();
+            var optionsAvailable = Driver.FindElements(By.XPath($"//*[text()='{option} ']/following-sibling::*/li/a"));
+            var optionsDisplayed = optionsAvailable.Where(x=> x.Enabled).Select(x=>x.Text).ToList();
 
-            foreach (var item in list)
-            {
-                var elementValue = item.Text;
-                if (item.Displayed && item.Enabled && elementValue.Equals(text))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return optionsDisplayed;
         }
+
+        private bool IsOptionAvailable(string option, string text) => GetOptionsDisplayed(option).Contains(text);
     }
 }

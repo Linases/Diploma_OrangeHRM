@@ -22,9 +22,9 @@ namespace Wrappers
 
         public void EnterText(string text) => TextBoxElement.SendKeys(text);
 
-        public void DeleteAndEnterText(string text, By locator)
+        public void DeleteAndEnterText(string text)
         {
-            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(locator));
+            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(By));
             Click();
             if (Element.GetAttribute("value").Length > 0)
             {
