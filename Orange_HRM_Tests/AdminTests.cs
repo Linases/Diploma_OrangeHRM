@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Constants.Admin;
+using NUnit.Framework;
 using Orange_HRM_Pages;
 using Utilities;
 
@@ -23,10 +24,10 @@ namespace Orange_HRM_Tests
             var administrationOptionsDisplayed = _adminPage.AreAdministrationOptionsDisplayed();
             Assert.That(administrationOptionsDisplayed, Is.True, "Admin options are not displayed");
             _adminPage.ClickUserManagement();
-            var userManagementOptionsDisplayed = _adminPage.AreOptionsDisplayed();
+            var userManagementOptionsDisplayed = _adminPage.AreOptionsDisplayed(AdminTabNames.UserManagement);
             Assert.That(userManagementOptionsDisplayed, Is.True, "User Management options are not displayed");
             _adminPage.ClickJob();
-            var areJobOptionsDisplayed = _adminPage.AreOptionsDisplayed();
+            var areJobOptionsDisplayed = _adminPage.AreOptionsDisplayed(AdminTabNames.Job);
             var isJobTitlesLinkAvailable = _adminPage.IsJobTitleAvailable();
             Assert.That(areJobOptionsDisplayed, Is.True, "Job options are not displayed");
             Assert.That(isJobTitlesLinkAvailable, Is.True, "'Job Titles' link is not available");
