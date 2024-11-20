@@ -1,5 +1,6 @@
 ﻿using Constants.Performance;
 using OpenQA.Selenium;
+using Utilities;
 using Wrappers;
 
 namespace Orange_HRM_Pages
@@ -34,6 +35,7 @@ namespace Orange_HRM_Pages
 
         public string GetKPIRecords()
         {
+            Driver.GetWait().Until(driver => Records.Displayed);
             var numbers = new string(Records.Text.Where(char.IsDigit).ToArray());
 
             return numbers;
