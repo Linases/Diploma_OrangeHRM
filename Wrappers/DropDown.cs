@@ -32,8 +32,9 @@ namespace Wrappers
             var list = Driver.FindElements(By).ToList();
             if (list.Count > 0)
             {
-                var firstElement = list.Last();
-                firstElement.Click();
+                var element = list.Last();
+                Driver.GetWait().Until(driver => element.Displayed && element.Enabled);
+                element.Click();
             }
         }
     }
