@@ -7,7 +7,7 @@
         public const string Dashboard = "Dashboard";
         public const string Leave = "Leave";
         public const string Time = "Time";
-        public const string Recrutment = "Recrutment";
+        public const string Recruitment = "Recruitment";
         public const string MyInfo = "My Info";
         public const string Performance = "Performance";
         public const string Directory = "Directory";
@@ -22,7 +22,7 @@
             Dashboard,
             Leave,
             Time,
-            Recrutment,
+            Recruitment,
             MyInfo,
             Performance,
             Directory,

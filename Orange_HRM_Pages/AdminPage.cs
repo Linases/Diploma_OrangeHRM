@@ -24,7 +24,8 @@ namespace Orange_HRM_Pages
 
         public bool IsAnyNationalitiesDisplayed()
         {
-            var list = Driver.GetWaitForElementsVisible(By.XPath("//*[@class='oxd-table-body']/div")).Where(x => x.Displayed).ToList();
+            var list = Driver.GetWaitForElementsVisible(By.XPath("//*[@class='oxd-table-body']/div"))
+                .Where(x => x.Displayed).ToList();
 
             return list.Count > 0;
         }
@@ -52,7 +53,7 @@ namespace Orange_HRM_Pages
             return false;
         }
 
-        public bool IsJobTitleAvailable() => IsOptionAvailable(AdminTabNames.Job,JobTabNames.JobTitles);
+        public bool IsJobTitleAvailable() => IsOptionAvailable(AdminTabNames.Job, JobTabNames.JobTitles);
 
         public void SelectJobTitlesButton() => JobDropdownMenu.SelectByTextValue(JobTabNames.JobTitles);
 
@@ -72,10 +73,10 @@ namespace Orange_HRM_Pages
             SaveButton.Click();
         }
 
-        private List <string> GetOptionsDisplayed(string option)
+        private List<string> GetOptionsDisplayed(string option)
         {
             var optionsAvailable = Driver.FindElements(By.XPath($"//*[text()='{option} ']/following-sibling::*/li/a"));
-            var optionsDisplayed = optionsAvailable.Where(x=> x.Enabled).Select(x=>x.Text).ToList();
+            var optionsDisplayed = optionsAvailable.Where(x => x.Enabled).Select(x => x.Text).ToList();
 
             return optionsDisplayed;
         }

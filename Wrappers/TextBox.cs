@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-
 using Utilities;
 
 namespace Wrappers
@@ -30,6 +29,7 @@ namespace Wrappers
             {
                 DeleteAllTextWithKey();
             }
+
             if (Element.Enabled)
             {
                 SendKeys(text);

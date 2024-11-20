@@ -13,6 +13,7 @@ namespace Orange_HRM_Pages
         private By MenuItemsLocator => By.XPath("//*[@class ='oxd-main-menu']/li//a//span");
         private Button PIMButton => new(By.XPath("//*[contains(@class, 'main-menu-item--name')and text()='PIM']"));
         private Button AdminButton => new(By.XPath("//*[contains(@class, 'main-menu-item--name')and text()='Admin']"));
+
         private Button DashboardButton => new(By.XPath("//*[contains(@class, 'main-menu-item--name')and text()='Dashboard']"));
         private Button PerformanceButton => new(By.XPath("//*[contains(@class, 'main-menu-item--name')and text()='Performance']"));
         private TextBox Search => new(By.XPath("//input[@placeholder='Search']"));

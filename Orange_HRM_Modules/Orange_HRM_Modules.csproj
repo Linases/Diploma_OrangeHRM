@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Constants\Constants.csproj" />
+    <ProjectReference Include="..\TestSettingsConfiguration\TestSettingsConfiguration.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 

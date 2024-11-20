@@ -99,9 +99,8 @@ namespace Wrappers
             return displayedList;
         }
 
-        public string GetTextToBePresentInElement( string text)
+        public string GetTextToBePresentInElement(string text)
         {
-
             Driver.GetWait(30, 10).Until(ExpectedConditions.TextToBePresentInElementLocated(By, text));
 
             return Element.Text;
