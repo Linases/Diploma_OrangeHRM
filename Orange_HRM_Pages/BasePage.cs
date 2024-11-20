@@ -20,6 +20,7 @@ namespace Orange_HRM_Pages
             try
             {
                 var itemInTable = new HrmWebElement(By.XPath($"{TableListLocator}//*[text()='{itemName}']"));
+
                 return itemInTable.Text.Equals(itemName);
             }
             catch (WebDriverTimeoutException)
@@ -38,16 +39,14 @@ namespace Orange_HRM_Pages
 
         public void ClickEditButton(string title)
         {
-            var editButton =
-                new Button(By.XPath(
+            var editButton = new Button(By.XPath(
                     $"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-pencil-fill']"));
             editButton.Click();
         }
 
         public void ClickTrashIcon(string title)
         {
-            var trashIcon =
-                new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-trash']"));
+            var trashIcon = new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-trash']"));
             trashIcon.ClickWhenClicable();
             VerifyDeleteToaster();
         }

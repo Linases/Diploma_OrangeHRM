@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Constants.TestSettings
+namespace TestSettingsConfiguration
 {
     public class TestSettings
     {
@@ -14,10 +14,9 @@ namespace Constants.TestSettings
         private IConfiguration TestConfiguration { get; } =
             new ConfigurationBuilder().AddJsonFile(TestSettingsJson).Build();
 
-
-        public static string AdminUserName { get; set; }
-        public static string AdminUserPassword { get; set; }
-        public string MainUrl { get; set; }
+        public static string? AdminUserName { get; set; }
+        public static string? AdminUserPassword { get; set; }
+        public string? MainUrl { get; set; }
 
         public void SetDefaultValues()
         {

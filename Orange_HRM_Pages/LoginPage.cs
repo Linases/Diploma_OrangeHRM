@@ -11,7 +11,7 @@ namespace Orange_HRM_Pages
         private TextBox UserNameTextBox => new TextBox(UserName);
         private TextBox PasswordTextBox => new TextBox(Password);
 
-        public void LoginAsAdministrator(string userName, string password)
+        public void LoginAsAdministrator(string? userName, string? password)
         {
             UserNameTextBox.ClearAndEnterText(userName, UserName);
             PasswordTextBox.ClearAndEnterText(password, Password);
