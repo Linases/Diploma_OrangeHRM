@@ -1,10 +1,13 @@
-﻿using OpenQA.Selenium;
+﻿using Constants.TestSettings.Enum;
+using FactoryPattern;
+using OpenQA.Selenium;
 using Utilities;
 
 namespace Wrappers
 {
     public class DropDown : HrmWebElement
     {
+        private static IWebDriver CurrentDriver => BrowserFactory.GetDriver(BrowserType.Chrome);
         public DropDown(By by) : base(by)
         {
             By = by;
@@ -28,14 +31,21 @@ namespace Wrappers
 
         public void SelectLastOption()
         {
-            Driver.GetWaitForElementsVisible(By);
             var list = Driver.FindElements(By).ToList();
-            if (list.Count > 0)
+            if (list.Count == 0)
             {
-                var element = list.Last();
-                Driver.GetWait().Until(driver => element.Displayed && element.Enabled);
-                element.Click();
+                throw new NoSuchElementException("No elements found matching the criteria.");
             }
+
+            var element = list.Last();
+            ScrollToElement(element);
+            Driver.GetWait().Until(driver => element.Displayed &element.Enabled );
+            element.Click();
+        }
+
+        private  void ScrollToElement( IWebElement element)
+        {
+            ((IJavaScriptExecutor)CurrentDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
     }
 }
