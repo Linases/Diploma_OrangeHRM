@@ -13,11 +13,5 @@ namespace Wrappers
         }
 
         public void ClickWhenClicable() => Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(By)).Click();
-
-        public void ClickIfDisplayed()
-        {
-            WaitForElementIsDisplayed();
-            ButtonElement.Click();
-        }
     }
 }

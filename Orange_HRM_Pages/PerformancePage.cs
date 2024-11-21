@@ -9,7 +9,6 @@ namespace Orange_HRM_Pages
         private const string ConfigureTabLocation = "//*[.='Configure ']";
 
         private DropDown JobTitleInput => new(By.XPath("//*[contains(@class,'select-text-input')]"));
-        private DropDown JobTitleDropdown => new(By.XPath("//*[contains(@class,'select-dropdown')]/*"));
         private HrmWebElement Records => new(By.XPath("(//*[@class ='oxd-text oxd-text--span'])[1]"));
         private TextBox KpiInput => new(By.XPath("(//label['Key Performance Indicator']/parent::*/following-sibling::*/input)[1]"));
         private Button ConfigureTab => new(By.XPath($"{ConfigureTabLocation}"));
@@ -25,9 +24,9 @@ namespace Orange_HRM_Pages
 
         public void SelectJobTitle()
         {
-            JobTitleInput.Click();
-            JobTitleDropdown.WaitForElementIsDisplayed();
-            JobTitleDropdown.SelectLastOption();
+            JobTitleInput.ClickIfDisplayed();
+            JobTitleInput.SendKeys(Keys.ArrowDown);
+            JobTitleInput.SendKeys(Keys.Enter);
         }
 
         public void ClickSaveButton() => Save();

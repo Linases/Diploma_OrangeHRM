@@ -107,5 +107,11 @@ namespace Wrappers
         }
 
         public void WaitForElementIsDisplayed() => Driver.GetWait().Until(x => IsElementDisplayed());
+
+        public void ClickIfDisplayed()
+        {
+            WaitForElementIsDisplayed();
+            Element.Click();
+        }
     }
 }
