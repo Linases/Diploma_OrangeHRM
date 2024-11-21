@@ -14,11 +14,6 @@ namespace Wrappers
         protected readonly IWebDriver Driver = BrowserFactory.GetDriver(BrowserType.Chrome);
         protected IWebElement? Element;
 
-        public HrmWebElement(By locator)
-        {
-            _ = WaitHelper.GetWait(Driver).Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(locator));
-            var elements = Driver.FindElements(locator);
-            Element = elements.Count > 0 ? elements.FirstOrDefault() : throw new NoSuchElementException("Element not found.");
         public HrmWebElement(By by)
         {
             By = by;
