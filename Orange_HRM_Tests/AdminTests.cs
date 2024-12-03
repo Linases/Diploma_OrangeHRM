@@ -6,21 +6,21 @@ using Utilities;
 namespace Orange_HRM_Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class AdminTests : BaseTest
     {
         private string _newTitle;
         private bool _needToDelete;
         private AdminPage _adminPage;
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
 
         [SetUp]
         public void AdminSetup()
         {
-            _leftPanelNavigationPage = new LeftPanelNavigationPage();
-            _adminPage = _leftPanelNavigationPage.ClickAdmin();
+           _adminPage = LeftPanelNavigationPage.ClickAdmin();
         }
 
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public void ValidateAdminFunction()
         {
             var administrationOptionsDisplayed = _adminPage.AreAdministrationOptionsDisplayed();
@@ -36,6 +36,7 @@ namespace Orange_HRM_Tests
         }
 
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public void AddJobTitle()
         {
             _newTitle = $"{RandomHelper.RandomGenerate(5)}_Name";

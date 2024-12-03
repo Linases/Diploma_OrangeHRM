@@ -6,8 +6,6 @@ namespace Wrappers
 {
     public class Button : HrmWebElement
     {
-        private Button ButtonElement => new(By);
-
         public Button(By by) : base(by)
         {
         }

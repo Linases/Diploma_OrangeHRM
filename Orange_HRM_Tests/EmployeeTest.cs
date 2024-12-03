@@ -9,6 +9,7 @@ using Utilities;
 namespace Orange_HRM_Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class EmployeeTest : BaseTest
     {
         private EmployeePage _employeePage;

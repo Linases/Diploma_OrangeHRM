@@ -5,6 +5,7 @@ using NUnit.Framework;
 namespace Orange_HRM_Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class DashboardTest : BaseTest
     {
         [Test]

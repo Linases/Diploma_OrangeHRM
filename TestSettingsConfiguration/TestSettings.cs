@@ -11,8 +11,7 @@ namespace TestSettingsConfiguration
             SetDefaultValues();
         }
 
-        private IConfiguration TestConfiguration { get; } =
-            new ConfigurationBuilder().AddJsonFile(TestSettingsJson).Build();
+        private IConfiguration TestConfiguration { get; } = new ConfigurationBuilder().AddJsonFile(TestSettingsJson).Build();
 
         public static string? AdminUserName { get; set; }
         public static string? AdminUserPassword { get; set; }

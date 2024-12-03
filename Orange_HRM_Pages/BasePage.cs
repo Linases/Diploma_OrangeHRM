@@ -7,13 +7,13 @@ namespace Orange_HRM_Pages
 {
     public class BasePage
     {
+        private const string ElementInTableLocator = "//*[text()='{0}']/parent::*/following-sibling::*//i";
         protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
         protected const string TableListLocator = "//*[@class='oxd-table-card']";
-        private const string ElementInTableLocator = "//*[text()='{0}']/parent::*/following-sibling::*//i";
 
-        protected Button AddButton => new(By.XPath("//button[text()=' Add ']"));
         private Button SaveButton => new(By.XPath("//button[text()=' Save ']"));
         private Button VerifyDeleteButton => new(By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']"));
+        protected Button AddButton => new(By.XPath("//button[text()=' Add ']"));
 
         public bool IsDisplayedInTable(string itemName)
         {

@@ -4,6 +4,7 @@ using NUnit.Framework;
 namespace Orange_HRM_Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class SearchTests : BaseTest
     {
         [Test]
