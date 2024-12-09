@@ -1,47 +1,41 @@
-﻿using Constants;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using BrowserType = Constants.TestSettings.Enum.BrowserType;
 
 namespace FactoryPattern
 {
     public static class BrowserFactory
     {
-        private static IWebDriver? _driver;
+        private static ThreadLocal<IWebDriver> _driver = new(() => CreateDriverInstance(BrowserType.Chrome));
 
         public static IWebDriver GetDriver(BrowserType browserType)
         {
-            _driver ??= CreateDriverInstance(browserType);
-            return _driver;
+            if (!_driver.IsValueCreated)
+            {
+                _driver.Value = CreateDriverInstance(browserType);
+            }
+
+            return _driver.Value;
         }
 
         private static IWebDriver CreateDriverInstance(BrowserType browserType)
         {
-            IWebDriver _driver;
-            switch (browserType)
+            return browserType switch
             {
-                case BrowserType.Firefox:
-                    {
-                        _driver = new FirefoxDriver();
-                        break;
-                    }
-                case BrowserType.Chrome:
-                    {
-                        _driver = new ChromeDriver();
-                        break;
-                    }
-                default:
-                    throw new NotSupportedException($"Browser type '{browserType}' is not supported.");
-            }
-            return _driver;
+                BrowserType.Firefox => new FirefoxDriver(),
+                BrowserType.Chrome => new ChromeDriver(),
+                _ => throw new NotSupportedException($"Browser type '{browserType}' is not supported."),
+            };
         }
 
         public static void CloseDriver()
         {
-            if (_driver != null)
+            if (_driver.IsValueCreated && _driver.Value != null)
             {
-                _driver.Quit();
-                _driver = null;
+                _driver.Value.Quit();
+                _driver.Dispose();
+                _driver = new ThreadLocal<IWebDriver>(() => CreateDriverInstance(BrowserType.Chrome));
             }
         }
     }

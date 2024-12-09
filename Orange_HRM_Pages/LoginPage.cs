@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using Orange_HRM_Modules;
 using Wrappers;
 
 namespace Orange_HRM_Pages
@@ -12,10 +11,10 @@ namespace Orange_HRM_Pages
         private TextBox UserNameTextBox => new TextBox(UserName);
         private TextBox PasswordTextBox => new TextBox(Password);
 
-        public void LoginAsAdministrator(User user)
+        public void LoginAsAdministrator(string? userName, string? password)
         {
-            UserNameTextBox.ClearAndEnterText(user.UserName, UserName);
-            PasswordTextBox.ClearAndEnterText(user.Password, Password);
+            UserNameTextBox.ClearAndEnterText(userName, UserName);
+            PasswordTextBox.ClearAndEnterText(password, Password);
             LoginButton.Click();
         }
 

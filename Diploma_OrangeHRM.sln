@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constants", "Constants\Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orange_HRM_Modules", "Orange_HRM_Modules\Orange_HRM_Modules.csproj", "{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSettingsConfiguration", "TestSettingsConfiguration\TestSettingsConfiguration.csproj", "{47B88471-699F-4675-81AB-08C5AAB95BBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +49,14 @@ Global
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6892BE20-05CB-4FB5-AC93-06F022C7AD7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{F66EB594-5F6A-488C-AFCB-BDBEFDED9271}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{47B88471-699F-4675-81AB-08C5AAB95BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B88471-699F-4675-81AB-08C5AAB95BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B88471-699F-4675-81AB-08C5AAB95BBF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{47B88471-699F-4675-81AB-08C5AAB95BBF}.Debug|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

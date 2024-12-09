@@ -1,6 +1,6 @@
-﻿namespace Constants
+﻿namespace Constants.Performance
 {
-    public class KPINames
+    public class KpiNames
     {
         public const string Analyze = "Analyze";
     }

@@ -1,42 +1,56 @@
-﻿using Constants;
+using Constants.TestSettings.Enum;
 using FactoryPattern;
 using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
-using Utilities;
 using Wrappers;
 
 namespace Orange_HRM_Pages
 {
     public class BasePage
     {
+        private const string ElementInTableLocator = "//*[text()='{0}']/parent::*/following-sibling::*//i";
         protected static IWebDriver Driver => BrowserFactory.GetDriver(BrowserType.Chrome);
-        protected By SpinnerLocator = By.XPath("//*[@class='oxd-loading-spinner']");
-        protected static By SaveButtonLocator => By.XPath("//button[text()=' Save ']");
-        protected static By AddButtonLocator => By.XPath("//button[text()=' Add ']");
-        protected static By VerifyDelete => By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']");
-        protected static Button AddButton => new Button(AddButtonLocator);
-        protected static Button SaveButton => new Button(SaveButtonLocator);
-        protected static Button VerifyDeleteButton => new Button(VerifyDelete);
-        protected HrmWebElement Spinner => new HrmWebElement(SpinnerLocator);
+        protected const string TableListLocator = "//*[@class='oxd-table-card']";
 
-        public void ClickAddButton()
+        private Button SaveButton => new(By.XPath("//button[text()=' Save ']"));
+        private Button VerifyDeleteButton => new(By.XPath("//*[@class='oxd-icon bi-trash oxd-button-icon']"));
+        protected Button AddButton => new(By.XPath("//button[text()=' Add ']"));
+
+        public bool IsDisplayedInTable(string itemName)
         {
-            AddButton.Click();
-            Driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(AddButtonLocator));
+            try
+            {
+                var itemInTable = new HrmWebElement(By.XPath($"{TableListLocator}//*[text()='{itemName}']"));
+
+                return itemInTable.Text.Equals(itemName);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
         }
 
-        public void ClickSaveButton()
+        protected void ClickAdd() => AddButton.ClickWhenClicable();
+
+        protected void Save()
         {
-            SaveButton.Click();
-            Driver.GetWait().Until(ExpectedConditions.InvisibilityOfElementLocated(SaveButtonLocator));
+            SaveButton.ClickWhenClicable();
+            SaveButton.WaitForElementIsDisplayed();
         }
 
-        public void WaitForSpinnerIsNotVisible() => Spinner.WaitForElementIsNotDisplayed(SpinnerLocator);
-
-        public void VerifyDeleteToaster()
+        public void ClickEditButton(string title)
         {
-            Driver.GetWait().Until(ExpectedConditions.ElementToBeClickable(VerifyDelete));
-            VerifyDeleteButton.ClickWhenClicable(VerifyDelete);
+            var editButton = new Button(By.XPath(
+                    $"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-pencil-fill']"));
+            editButton.Click();
         }
+
+        public void ClickTrashIcon(string title)
+        {
+            var trashIcon = new Button(By.XPath($"{string.Format(ElementInTableLocator, title)}[@class='oxd-icon bi-trash']"));
+            trashIcon.ClickWhenClicable();
+            VerifyDeleteToaster();
+        }
+
+        private void VerifyDeleteToaster() => VerifyDeleteButton.ClickWhenClicable();
     }
 }

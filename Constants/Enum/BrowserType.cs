@@ -1,4 +1,4 @@
-﻿namespace Constants
+﻿namespace Constants.TestSettings.Enum
 {
     public enum BrowserType
     {

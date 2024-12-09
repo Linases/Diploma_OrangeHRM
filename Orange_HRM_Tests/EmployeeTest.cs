@@ -1,4 +1,5 @@
-﻿using Constants;
+﻿using Constants.Html;
+using Constants.PIM;
 using NUnit.Framework;
 using Orange_HRM_Modules;
 using Orange_HRM_Pages;
@@ -8,26 +9,20 @@ using Utilities;
 namespace Orange_HRM_Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class EmployeeTest : BaseTest
     {
         private EmployeePage _employeePage;
-        private LeftPanelNavigationPage _leftPanelNavigationPage;
-
-        [SetUp]
-        public void Setup()
-        {
-            _leftPanelNavigationPage = new LeftPanelNavigationPage();
-        }
 
         [Test]
         public void AddNewEmployee()
         {
             _employeePage = LeftPanelNavigationPage.ClickPIM();
             _employeePage.ClickAddEmployee();
-            var headerTextAddEmployee = _leftPanelNavigationPage.GetAddEmployeeHeader();
-            Assert.That(headerTextAddEmployee, Is.EqualTo(PIMHeadersNames.AddEmployee));
-            var employee = _employeePage.AddEmployeeData(Employee.Default);
-            _ = Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.Personaldetails));
+            var headerTextAddEmployee = LeftPanelNavigationPage.GetAddEmployeeHeader();
+            Assert.That(headerTextAddEmployee, Is.EqualTo(PimTabNames.AddEmployee));
+            var employee = _employeePage.AddEmployeeData(Employee.GetDefaultEmployee());
+            Driver.GetWait().Until(ExpectedConditions.UrlContains(UrlPartsExisting.PersonalDetails));
             var isEmployeeListTabOpen = _employeePage.IsEmployeeListTabOpen();
             var isNameCorrect = _employeePage.IsNameDisplayedCorrectly($"{employee.FirstName} {employee.Lastname}");
             Assert.Multiple(() =>

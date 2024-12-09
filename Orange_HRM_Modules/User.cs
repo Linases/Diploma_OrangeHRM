@@ -1,25 +1,19 @@
-﻿using Constants;
+﻿using TestSettingsConfiguration;
 
 namespace Orange_HRM_Modules
 {
     public class User
     {
         public int Id { get; set; }
-        public required string UserName { get; set; }
-        public required string Password { get; set; }
+        public  string? UserName { get; set; }
+        public string? Password { get; set; }
 
-        public static User Admin
-        {
-            get
-
+        public static User GetAdminUser() =>
+            new()
             {
-                return new User
-                {
-                    Id = 1,
-                    UserName = ValidCredentials.UserName,
-                    Password = ValidCredentials.Password,
-                };
-            }
-        }
+                Id = 1,
+                UserName = TestSettings.AdminUserName,
+                Password = TestSettings.AdminUserPassword,
+            };
     }
 }

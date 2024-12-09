@@ -1,0 +1,9 @@
+{
+  "Settings": {
+    "Common": {
+      "MainUrl": "https://opensource-demo.orangehrmlive.com",
+      "AdminUsername": "Admin",
+      "AdminUserPassword": "admin123"
+    }
+  }
+}

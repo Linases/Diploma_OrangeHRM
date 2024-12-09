@@ -6,14 +6,13 @@ namespace Orange_HRM_Pages
 {
     public class EmployeePage
     {
-        private By Employee => By.XPath("//*[@class='orangehrm-edit-employee-name']/h6");
         private Button AddEmployee => new(By.XPath("//a[text()='Add Employee']/parent::*"));
         private TextBox FirstName => new(By.XPath("//*[@name='firstName']"));
         private TextBox MiddleName => new(By.XPath("//*[@name='middleName']"));
         private TextBox LastName => new(By.XPath("//*[@name='lastName']"));
         private Button SaveButton => new(By.XPath("//*[text()=' Save ']"));
         private Button EmployeeList => new(By.XPath("//*[text()='Employee List']/parent::*"));
-        private TextBox EmployeeName => new(Employee);
+        private TextBox EmployeeName => new(By.XPath("//*[@class='orangehrm-edit-employee-name']/h6"));
 
         public void ClickAddEmployee() => AddEmployee.Click();
 
@@ -29,8 +28,9 @@ namespace Orange_HRM_Pages
 
         public bool IsNameDisplayedCorrectly(string name)
         {
-            var element = EmployeeName.GetTextToBePresentInElement(EmployeeName, name);
-            return element.Equals(name);
+            var textValue = EmployeeName.GetTextToBePresentInElement(name);
+
+            return textValue.Equals(name);
         }
 
         public bool IsEmployeeListTabOpen() => IsTabOpen(EmployeeList);
@@ -38,8 +38,8 @@ namespace Orange_HRM_Pages
         private bool IsTabOpen(HrmWebElement element)
         {
             var value = element.GetAttribute("class");
+
             return value.Contains("visited");
         }
     }
 }
-
