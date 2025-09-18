@@ -16,7 +16,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Linases/Diploma_OrangeHRM.git'
+                git branch: 'master', url: 'https://github.com/Linases/Diploma_OrangeHRM.git'
             }
         }
 
