@@ -24,7 +24,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Constants\Constants.csproj" />
     <ProjectReference Include="..\FactoryPattern\FactoryPattern.csproj" />
+    <ProjectReference Include="..\TestSettingsConfiguration\TestSettingsConfiguration.csproj" />
     <ProjectReference Include="..\Orange_HRM_Pages\Orange_HRM_Pages.csproj" />
   </ItemGroup>
+
+<ItemGroup>
+  <None Update="..\TestSettingsConfiguration\testsettings.json">
+    <Link>testsettings.json</Link>
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
 
 </Project>
