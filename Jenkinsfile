@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    tools {
+        dotnetsdk 'dotnet-sdk-8.0'
+    }
+
+    stages {
+        stage('Clean workspace') {
+            steps {
+                script {
+                    deleteDir() 
+                }
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Linases/Diploma_OrangeHRM.git'
+            }
+        }
+
+        stage('Restore') {
+            steps {
+                bat "dotnet restore Diploma_OrangeHRM.sln"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat "dotnet build Diploma_OrangeHRM.sln --no-restore"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat "dotnet test Diploma_OrangeHRM.sln --no-build --logger \"trx;LogFileName=test_results.trx\""
+            }
+        }
+    }
+
+  post {
+        always {
+            junit '**/TestResults/*.xml'
+        }
+    }
+}
