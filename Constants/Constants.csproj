@@ -10,6 +10,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-rc.2.24473.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-rc.2.24473.5" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0-rc.2.24473.5" />
+    <PackageReference Include="ReportPortal.NUnit" Version="4.8.0" />
+    <PackageReference Include="ReportPortal.Shared" Version="3.10.0" />
     <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
   </ItemGroup>
 

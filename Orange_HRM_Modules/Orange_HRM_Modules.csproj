@@ -12,4 +12,9 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ReportPortal.NUnit" Version="4.8.0" />
+    <PackageReference Include="ReportPortal.Shared" Version="3.10.0" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ReportPortal.NUnit" Version="4.8.0" />
+    <PackageReference Include="ReportPortal.Shared" Version="3.10.0" />
     <PackageReference Include="Selenium.Support" Version="4.25.0" />
     <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
   </ItemGroup>

@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ReportPortal.NUnit" Version="4.8.0" />
+    <PackageReference Include="ReportPortal.Shared" Version="3.10.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.25.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Orange_HRM_Modules\Orange_HRM_Modules.csproj" />
     <ProjectReference Include="..\Wrappers\Wrappers.csproj" />
-	<ProjectReference Include="..\Orange_HRM_Forms\Orange_HRM_Forms.csproj" />
   </ItemGroup>
 
 </Project>
