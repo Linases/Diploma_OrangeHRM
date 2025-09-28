@@ -29,12 +29,18 @@
     <ProjectReference Include="..\TestSettingsConfiguration\TestSettingsConfiguration.csproj" />
     <ProjectReference Include="..\Orange_HRM_Pages\Orange_HRM_Pages.csproj" />
   </ItemGroup>
-
-<ItemGroup>
+    
+    <ItemGroup>
   <None Include="..\TestSettingsConfiguration\testsettings.json">
     <Link>testsettings.json</Link>
     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
   </None>
-</ItemGroup>
+    </ItemGroup>
+    
+    <ItemGroup>
+    <None Update="reportportal.config.json">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    </ItemGroup>
 
 </Project>
