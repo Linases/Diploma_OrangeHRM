@@ -9,7 +9,7 @@ pipeline {
         stage('Clean workspace') {
             steps {
                 script {
-                    deleteDir() 
+                    deleteDir()
                 }
             }
         }
@@ -32,17 +32,14 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Test export to ReportPortal') {
             steps {
-                bat 'mkdir TestResults'
-                bat 'dotnet test Diploma_OrangeHRM.sln --no-build --logger "junit;LogFilePath=TestResults\\test-results.xml"'
+                bat '''
+                    dotnet test Diploma_OrangeHRM.sln ^
+                        --no-build ^
+                        -c Release
+                '''
             }
-        }
-    }
-
-  post {
-        always {
-            junit '**/TestResults/*.xml'
         }
     }
 }
