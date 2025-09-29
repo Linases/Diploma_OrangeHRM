@@ -9,6 +9,9 @@
   "Launch": {
     "Name": "Jenkins Test Run",
     "Description": "Automated test run from Jenkins",
-    "Attributes": [ "jenkins", "nunit" ]
+    "Attributes": ["jenkins", "nunit"]
+  },
+  "reporting": {
+    "hierarchySync": "true"
   }
 }
