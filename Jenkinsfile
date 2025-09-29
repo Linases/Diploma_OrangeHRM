@@ -37,7 +37,7 @@ pipeline {
                 bat '''
                     dotnet test Diploma_OrangeHRM.sln ^
                         --no-build ^
-                        --logger "ReportPortal"
+                        -c Release
                 '''
             }
         }
