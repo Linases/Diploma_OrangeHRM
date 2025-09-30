@@ -51,8 +51,8 @@ pipeline {
             }
             post {
                 always {
-                    // Jenkins publishes trx results to the build UI
-                    mstest testResultsFilePattern: '**/TestResults/*.trx', keepLongStdio: true, failOnError: false
+                    // Keep Jenkins logs in UI
+                    junit allowEmptyResults: true, testResults: '**/TestResults/*.trx'
                 }
             }
         }
