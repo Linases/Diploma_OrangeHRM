@@ -1,17 +1,15 @@
 ﻿{
   "Server": {
     "Url": "http://localhost:8080/api/v1",
-    "Project": "default_personal",
+    "Project": "OrangeHRM_Project",
     "Authentication": {
       "Uuid": "Linas_uQWWaKA9TECQJMWjmCR3UExLBo0b_hI213DDy0eT_ajeCamTGUSWaPfeDWr5yTFe"
     }
   },
   "Launch": {
-    "Name": "Jenkins Test Run",
-    "Description": "Automated test run from Jenkins",
-    "Attributes": ["jenkins", "nunit"]
-  },
-  "reporting": {
-    "hierarchySync": "true"
+    "Name": "OrangeHRM autotests run execution",
+    "Description": "Autotests run report from Jenkins",
+    "debugMode": false,
+    "Attributes": ["jenkins", "nunit", "Web"]
   }
 }
