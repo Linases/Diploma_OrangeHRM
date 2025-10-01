@@ -5,12 +5,18 @@ pipeline {
         dotnetsdk 'dotnet-sdk-8.0'
     }
 
+    options {
+        timeout(time: 20, unit: 'MINUTES')
+        timestamps()
+    }
+
     stages {
         stage('Clean workspace') {
+            when {
+                expression { return params.CLEAN_WORKSPACE == true } 
+            }
             steps {
-                script {
-                    deleteDir()
-                }
+                cleanWs()
             }
         }
 
@@ -28,17 +34,26 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat "dotnet build Diploma_OrangeHRM.sln --no-restore"
+                bat "dotnet build Diploma_OrangeHRM.sln --no-restore -c Release"
             }
         }
 
-        stage('Test export to ReportPortal') {
+        stage('Test and Export to ReportPortal') {
             steps {
-                bat '''
-                    dotnet test Diploma_OrangeHRM.sln ^
-                        --no-build ^
-                        -c Release
-                '''
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    bat '''
+                        dotnet test Diploma_OrangeHRM.sln ^
+                            --no-build ^
+                            -c Release ^
+                            --logger:"trx;LogFileName=test_results.trx"
+                    '''
+                }
+            }
+            post {
+                always {
+                    // Keep Jenkins logs in UI
+                    junit allowEmptyResults: true, testResults: '**/TestResults/*.trx'
+                }
             }
         }
     }
