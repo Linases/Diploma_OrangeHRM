@@ -1,7 +1,7 @@
 ﻿{
   "Server": {
     "Url": "http://localhost:8080/api/v1",
-    "Project": "OrangeHRM_Project",
+    "Project": "default_personal",
     "Authentication": {
       "Uuid": "Linas_uQWWaKA9TECQJMWjmCR3UExLBo0b_hI213DDy0eT_ajeCamTGUSWaPfeDWr5yTFe"
     }
